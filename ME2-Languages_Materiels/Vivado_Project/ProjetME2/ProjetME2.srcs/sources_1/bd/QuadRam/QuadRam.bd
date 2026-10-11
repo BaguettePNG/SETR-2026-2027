@@ -1,0 +1,410 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x38BF2E60BDAE58FB",
+      "device": "xc7a200tfbg676-2",
+      "gen_directory": "../../../../ProjetME2.gen/sources_1/bd/QuadRam",
+      "name": "QuadRam",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2025.1",
+      "validated": "true"
+    },
+    "design_tree": {
+      "sync_ram_0": "",
+      "sync_ram_1": "",
+      "sync_ram_2": "",
+      "sync_ram_3": "",
+      "Decoder_0": "",
+      "xlslice_0": "",
+      "xlslice_1": ""
+    },
+    "ports": {
+      "clock_0": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "QuadRam_clock_0",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          }
+        }
+      },
+      "we_0": {
+        "direction": "I"
+      },
+      "address_0": {
+        "direction": "I",
+        "left": "9",
+        "right": "0"
+      },
+      "datain_0": {
+        "direction": "I",
+        "left": "7",
+        "right": "0"
+      },
+      "dataout_0": {
+        "direction": "O",
+        "left": "7",
+        "right": "0"
+      }
+    },
+    "components": {
+      "sync_ram_0": {
+        "vlnv": "xilinx.com:module_ref:sync_ram:1.0",
+        "ip_revision": "1",
+        "xci_name": "QuadRam_sync_ram_0_0",
+        "xci_path": "ip\\QuadRam_sync_ram_0_0\\QuadRam_sync_ram_0_0.xci",
+        "inst_hier_path": "sync_ram_0",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "ADDR_LENGHT": {
+            "value": "8"
+          }
+        },
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "sync_ram",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "cs": {
+            "direction": "I"
+          },
+          "clock": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "QuadRam_clock_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "we": {
+            "direction": "I"
+          },
+          "address": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "datain": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "dataout": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          }
+        }
+      },
+      "sync_ram_1": {
+        "vlnv": "xilinx.com:module_ref:sync_ram:1.0",
+        "ip_revision": "1",
+        "xci_name": "QuadRam_sync_ram_1_0",
+        "xci_path": "ip\\QuadRam_sync_ram_1_0\\QuadRam_sync_ram_1_0.xci",
+        "inst_hier_path": "sync_ram_1",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "ADDR_LENGHT": {
+            "value": "8"
+          }
+        },
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "sync_ram",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "cs": {
+            "direction": "I"
+          },
+          "clock": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "QuadRam_clock_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "we": {
+            "direction": "I"
+          },
+          "address": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "datain": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "dataout": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          }
+        }
+      },
+      "sync_ram_2": {
+        "vlnv": "xilinx.com:module_ref:sync_ram:1.0",
+        "ip_revision": "1",
+        "xci_name": "QuadRam_sync_ram_2_0",
+        "xci_path": "ip\\QuadRam_sync_ram_2_0\\QuadRam_sync_ram_2_0.xci",
+        "inst_hier_path": "sync_ram_2",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "ADDR_LENGHT": {
+            "value": "8"
+          }
+        },
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "sync_ram",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "cs": {
+            "direction": "I"
+          },
+          "clock": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "QuadRam_clock_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "we": {
+            "direction": "I"
+          },
+          "address": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "datain": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "dataout": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          }
+        }
+      },
+      "sync_ram_3": {
+        "vlnv": "xilinx.com:module_ref:sync_ram:1.0",
+        "ip_revision": "1",
+        "xci_name": "QuadRam_sync_ram_3_0",
+        "xci_path": "ip\\QuadRam_sync_ram_3_0\\QuadRam_sync_ram_3_0.xci",
+        "inst_hier_path": "sync_ram_3",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "ADDR_LENGHT": {
+            "value": "8"
+          }
+        },
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "sync_ram",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "cs": {
+            "direction": "I"
+          },
+          "clock": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "QuadRam_clock_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "we": {
+            "direction": "I"
+          },
+          "address": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "datain": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "dataout": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          }
+        }
+      },
+      "Decoder_0": {
+        "vlnv": "xilinx.com:module_ref:Decoder:1.0",
+        "ip_revision": "1",
+        "xci_name": "QuadRam_Decoder_0_0",
+        "xci_path": "ip\\QuadRam_Decoder_0_0\\QuadRam_Decoder_0_0.xci",
+        "inst_hier_path": "Decoder_0",
+        "has_run_ip_tcl": "true",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "Decoder",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "addr_sel": {
+            "direction": "I",
+            "left": "1",
+            "right": "0"
+          },
+          "cs": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          }
+        }
+      },
+      "xlslice_0": {
+        "vlnv": "xilinx.com:ip:xlslice:1.0",
+        "ip_revision": "5",
+        "xci_name": "QuadRam_xlslice_0_0",
+        "xci_path": "ip\\QuadRam_xlslice_0_0\\QuadRam_xlslice_0_0.xci",
+        "inst_hier_path": "xlslice_0",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "9"
+          },
+          "DIN_TO": {
+            "value": "8"
+          },
+          "DIN_WIDTH": {
+            "value": "10"
+          },
+          "DOUT_WIDTH": {
+            "value": "2"
+          }
+        }
+      },
+      "xlslice_1": {
+        "vlnv": "xilinx.com:ip:xlslice:1.0",
+        "ip_revision": "5",
+        "xci_name": "QuadRam_xlslice_0_1",
+        "xci_path": "ip\\QuadRam_xlslice_0_1\\QuadRam_xlslice_0_1.xci",
+        "inst_hier_path": "xlslice_1",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "7"
+          },
+          "DIN_TO": {
+            "value": "0"
+          },
+          "DIN_WIDTH": {
+            "value": "10"
+          },
+          "DOUT_WIDTH": {
+            "value": "8"
+          }
+        }
+      }
+    },
+    "nets": {
+      "Decoder_0_cs": {
+        "ports": [
+          "Decoder_0/cs",
+          "sync_ram_0/cs",
+          "sync_ram_1/cs",
+          "sync_ram_2/cs",
+          "sync_ram_3/cs"
+        ]
+      },
+      "address_0_1": {
+        "ports": [
+          "address_0",
+          "xlslice_0/Din",
+          "xlslice_1/Din"
+        ]
+      },
+      "clock_0_1": {
+        "ports": [
+          "clock_0",
+          "sync_ram_1/clock",
+          "sync_ram_2/clock",
+          "sync_ram_3/clock",
+          "sync_ram_0/clock"
+        ]
+      },
+      "datain_0_1": {
+        "ports": [
+          "datain_0",
+          "sync_ram_0/datain",
+          "sync_ram_1/datain",
+          "sync_ram_2/datain",
+          "sync_ram_3/datain"
+        ]
+      },
+      "sync_ram_3_dataout": {
+        "ports": [
+          "sync_ram_3/dataout",
+          "dataout_0"
+        ]
+      },
+      "we_0_1": {
+        "ports": [
+          "we_0",
+          "sync_ram_0/we",
+          "sync_ram_1/we",
+          "sync_ram_2/we",
+          "sync_ram_3/we"
+        ]
+      },
+      "xlslice_0_Dout": {
+        "ports": [
+          "xlslice_0/Dout",
+          "Decoder_0/addr_sel"
+        ]
+      },
+      "xlslice_1_Dout": {
+        "ports": [
+          "xlslice_1/Dout",
+          "sync_ram_0/address",
+          "sync_ram_1/address",
+          "sync_ram_3/address",
+          "sync_ram_2/address"
+        ]
+      }
+    }
+  }
+}

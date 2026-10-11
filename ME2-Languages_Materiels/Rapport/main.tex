@@ -1,0 +1,107 @@
+\documentclass[a4paper,11pt]{article}
+
+\input{Param/UsePackage.tex}
+
+% Définition des couleurs
+\definecolor{vhdlkeyword}{RGB}{0, 51, 153}      % Bleu foncé
+\definecolor{vhdltype}{RGB}{153, 0, 153}        % Violet
+\definecolor{vhdlstring}{RGB}{192, 0, 0}        % Rouge
+\definecolor{vhdlcomment}{RGB}{34, 139, 34}     % Vert forêt
+\definecolor{vhdlbackground}{RGB}{248, 248, 248} % Gris très clair
+
+% Style VHDL sur mesure
+\lstdefinelanguage{VHDL_Custom}{
+  language=VHDL,
+  morekeywords={
+    architecture,entity,is,end,behavior,process,begin,
+    signal,variable,constant,port,in,out,inout,buffer,
+    generic,map,component,use,library,all,if,then,else,
+    elsif,case,when,others,loop,while,for,generate,
+    rising_edge,falling_edge,not,and,or,nand,nor,xor,xnor
+  },
+  morekeywords=[2]{
+    std_logic,std_logic_vector,integer,boolean,natural,
+    positive,character,string,signed,unsigned,bit,bit_vector
+  },
+  sensitive=false, % VHDL est insensible à la casse
+  morecomment=[l]{--},
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstdefinestyle{vhdlstyle}{
+  language=VHDL_Custom,
+  backgroundcolor=\color{vhdlbackground},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{vhdlkeyword}\bfseries,
+  keywordstyle=[2]\color{vhdltype}\bfseries,
+  commentstyle=\color{vhdlcomment}\itshape,
+  stringstyle=\color{vhdlstring},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black!20},
+  tabsize=2,
+  captionpos=b
+}
+
+\lstset{style=vhdlstyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    pdftitle={Rapport de projet},
+    pdfauthor={Auteur},
+    pdfkeywords={projet, rapport}
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    % --- Logo en haut ---
+    \includegraphics[width=0.9\linewidth]{Param/Polytech_Univ.png}\\[1.5cm]
+
+    % --- Titre principal ---
+    {\Huge \textbf{Rapport de Languages matériels et réutilisation}}\\[0.5cm]
+    \rule{0.7\textwidth}{0.5pt}\\[0.8cm]
+    {\Large \textbf{ETN5 - SETR}}\\[1cm]
+    
+    % --- Mise en page en deux colonnes (élève / encadrants) ---
+    \noindent
+    \begin{minipage}[t]{0.48\textwidth}
+        \raggedright
+        {\large \textbf{Élèves :}}\\[0.3cm]
+        {\large
+        Nolan \textsc{BUCHET}}\\[0.6cm]
+        {\large
+        Maxence \textsc{BOULEAU}}\\[0.6cm]
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \raggedleft
+        {\large \textbf{Date :}}\\[0.3cm]
+        {\large
+        Octobre 2026}
+    \end{minipage}
+    \vfill
+\end{titlepage}
+
+\input{Param/param.tex}
+
+\tableofcontents
+
+\newpage
+
+\include{Includes/0_Introduction}
+
+\include{Includes/1_Ram}
+
+\end{document}

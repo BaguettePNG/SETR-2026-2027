@@ -1,0 +1,68 @@
+% =====================================================================
+% 1. ENCODAGE, POLICES ET LANGUE
+% =====================================================================
+\usepackage[utf8]{inputenc}       % Gestion de l'UTF-8
+\usepackage[T1]{fontenc}          % Encodage des caractères pour le français
+\usepackage[french]{babel}        % Support du français
+\usepackage{lmodern}              % Police propre et vectorielle
+\usepackage{gensymb}
+
+% =====================================================================
+% 2. MISE EN PAGE ET GÉOMÉTRIE
+% =====================================================================
+\usepackage[a4paper, margin=3.2cm, top=3.5cm, bottom=4cm]{geometry}
+\usepackage{setspace}             % Gestion de l'interligne
+\usepackage{fancyhdr}             % En-têtes et pieds de page personnalisés (Remplace fancyheadings)
+\usepackage{lastpage}             % Pour obtenir le numéro de la dernière page (\pageref{LastPage})
+\usepackage[absolute,overlay]{textpos} % Positionnement absolu de blocs de texte
+\usepackage{eso-pic}              % Pour ajouter des éléments en arrière-plan de la page
+
+% =====================================================================
+% 3. MATHÉMATIQUES ET SCIENCES
+% =====================================================================
+\usepackage{amsmath}              % Commandes mathématiques de base
+\usepackage{amsfonts}             % Polices mathématiques
+\usepackage{amssymb}              % Symboles mathématiques
+\usepackage{siunitx}              % Alignement et écriture des unités scientifiques
+
+% =====================================================================
+% 4. GRAPHIQUES, TRACÉS ET DIAGRAMMES
+% =====================================================================
+\usepackage{graphicx}             % Inclusion d'images
+\usepackage{svg}                  % Inclusion d'images SVG
+\graphicspath{{Param/}, {Images/}} % Dossiers où chercher les images
+
+\usepackage{tikz}                 % Dessin vectoriel personnalisé
+\usetikzlibrary{shapes.geometric, arrows, chains, positioning, babel}
+\usepackage{pgfplots}             % Tracé de graphiques mathématiques de haute qualité
+\pgfplotsset{compat=1.18}
+
+\usepackage[european, straightvoltages, RPvoltages]{circuitikz} % Tracé de circuits électriques
+
+% =====================================================================
+% 5. TABLEAUX
+% =====================================================================
+\usepackage{booktabs}             % Tableaux de qualité professionnelle (\toprule, \midrule, etc.)
+\usepackage{tabularx}             % Tableaux à largeur fixe adaptative
+\usepackage{array}                % Personnalisation avancée des colonnes
+\usepackage{longtable}            % Tableaux multipages
+\usepackage{makecell}             % Retours à la ligne et mise en forme dans les cellules
+\usepackage{rotating}             % Pour tourner les tableaux ou les figures (mode paysage local)
+
+% =====================================================================
+% 6. STRUCTURATION, BLOCS ET COULEURS
+% =====================================================================
+\usepackage[table]{xcolor}        % Gestion des couleurs et coloration des lignes de tableaux
+\usepackage{titlesec}             % Personnalisation des titres (\section, \subsection)
+\usepackage{enumitem}             % Personnalisation des listes à puces
+\usepackage{subcaption}           % Légendes pour les sous-figures
+\usepackage{float}                % Forcer le positionnement des éléments graphiques ([H])
+\usepackage{listings}             % Inclusion et coloration de code source (Python, C++, etc.)
+\usepackage[most]{tcolorbox}      % Boîtes d'alerte et encadrés stylisés
+\usepackage{pifont}               % Symboles et puces spécifiques (\ding)
+\usepackage{lipsum}               % Générateur de faux texte de test
+
+% =====================================================================
+% 7. LIENS HYPERTEXTES (Toujours charger en dernier !)
+% =====================================================================
+\usepackage[hidelinks]{hyperref}  % Liens cliquables internes et externes sans bordures rouges

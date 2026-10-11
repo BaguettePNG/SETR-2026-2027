@@ -1,0 +1,12 @@
+\section{Introduction}
+
+Ce mini-projet vise à concevoir et valider par simulation un système numérique sur puce articulé autour 
+d'un processeur RISC-V et d'une mémoire modulaire, tout en mettant en application les principes de généricité 
+et de réutilisation de blocs matériels (IP cores). La démarche consiste d'abord à transformer une mémoire 
+RAM élémentaire en VHDL pour la rendre paramétrable et à instancier un bloc mémoire étendu (quadram) associé 
+à un décodeur d'adresses. Dans un second temps, le modèle de processeur décrit en Verilog est adapté pour 
+supporter l'extension d'instructions RV32IM et pour s'interfacer avec la mémoire externe. L'ensemble est 
+enfin réuni au sein d'une entité englobante mixte VHDL/Verilog puis validé sous ModelSim à l'aide de programmes 
+de test en assembleur, illustrant ainsi l'intégralité du flot de co-conception et d'intégration système.
+\\
+

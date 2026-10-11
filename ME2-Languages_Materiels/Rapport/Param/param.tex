@@ -1,0 +1,81 @@
+% LOGO IUT
+\AddToHook{shipout/background}{%
+  \begin{textblock*}{100cm}(100cm,100cm) % Ajustez les coordonnées pour décaler l'image
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, inner sep=18pt] at (current page.north east) {%
+      \includegraphics[scale=0.18]{Logo_Universite_de_nantes.png}%
+    };
+  \end{tikzpicture}%
+  \end{textblock*}
+}
+
+
+\AddToHook{shipout/background}{%
+  \begin{textblock*}{100cm}(100cm,100cm) % Ajustez '15cm' pour déplacer l'image plus à droite
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north west, inner sep=25pt] at (current page.north west) {%
+        \includegraphics[scale=0.50]{logo_poly.png}%
+      };
+    \end{tikzpicture}%
+  \end{textblock*}
+}
+
+
+% NOM FICHIER
+\AddToHook{shipout/background}{%
+  \begin{textblock*}{1cm}(1cm,1cm)
+  \end{textblock*}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north, inner sep=50pt] at (current page.north) {%    
+    {\fontsize{10}{13}\selectfont Rapport de Languages matériels et réutilisation}
+    };
+  \end{tikzpicture}%
+}
+
+% PAGE
+\AddToHook{shipout/background}{%
+  \begin{textblock*}{1cm}(1cm,1cm)
+  \end{textblock*}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south, inner sep=50pt] at (current page.south) {%
+    \thepage/\pageref{LastPage}
+    };
+  \end{tikzpicture}%
+}
+
+% NOM PRENOM
+\AddToHook{shipout/background}{%
+  \begin{textblock*}{1cm}(1cm,1cm)
+  \end{textblock*}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south west, inner sep=50pt] at (current page.south west) {%    
+    {\fontsize{10}{13}\selectfont Maxence BOULEAU \& Nolan BUCHET}
+    };
+  \end{tikzpicture}%
+}
+
+% DATE
+\AddToHook{shipout/background}{%
+  \begin{textblock*}{1cm}(1cm,1cm)
+  \end{textblock*}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south east, inner sep=50pt] at (current page.south east) {%    
+    {\fontsize{10}{13}\selectfont Octobre 2026}
+    };
+  \end{tikzpicture}%
+}
+
+
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+
+\fancyhead[L]{\large} % Left side of the header (section title)
+\fancyhead[R]{\large} % Right side of the header (page number)
+
+% Footer configuration
+\fancyfoot[C]{\large} % Centered text in the footer
+
+\renewcommand{\headrulewidth}{1pt} % Header rule thickness
+\renewcommand{\footrulewidth}{1pt} % Footer rule thickness
+
+

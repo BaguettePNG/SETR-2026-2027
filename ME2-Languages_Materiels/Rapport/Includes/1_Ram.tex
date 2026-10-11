@@ -1,0 +1,63 @@
+\section{Récupération d’un modèle de RAM}
+
+\subsection{Validation du fonctionnement de la RAM}
+
+Nous récupérons le modèle \texttt{ramchip.vhd} et son testbench afin de pouvoir observer et analyser son comportement sur ModelSim.
+
+% Injecter le graphe de fonctionnement de la RAM
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/1.png}
+\end{figure}
+
+Dans le chronogramme ci-dessus, nous observons que notre simulation représente correctement le comportement d'une RAM\@.
+\\
+
+Le bon fonctionnement se valide en commençant par mettre \texttt{WE} à 1. Sans celui-ci, la RAM ne peut pas écrire de données.
+Ensuite, à chaque front d'horloge, nous mettons à jours une addresse dans laquelle nous voulons écrire une donnée. 
+Nous mettons ensuite à jour la donnée que nous voulons écrire dans la RAM. 
+\\
+
+\begin{itemize}
+    \item A 20 ns : Ecriture de 01 à l'addresse 001 -> DataOut = 01
+    \item A 30 ns : Ecriture de 02 à l'addresse 002 -> DataOut = 02
+    \item A 40 ns : Ecriture de 03 à l'addresse 003 -> DataOut = 03, et ainsi de suite
+    \\
+\end{itemize}
+
+Un effet de décalage apparait, la valeur affichée correspond toujours à la donnée appliquée au cycle précédent.
+Exemple entre $20\text{ ns}$ et $30\text{ ns}$, Address vaut 001, DataIn vaut 01, et DataOut restitue 00. Celui 
+ci est normal car notre Ram est synchrone, et ne restitue donc la donnée qu'au cycle suivant.
+\\
+
+
+\subsection{Modification du code de la RAM}
+
+Dans un second temps, nous mettons à jour le code en remplaçant les \texttt{std\_logic\_vector} par des \texttt{unsigned} 
+afin de pouvoir effectuer des opérations arithmétiques sur les adresses. Le fonctionnement reste identique à celui de la RAM initiale.
+\\
+
+\subsection{Ajout de la généricité de la RAM}
+
+Pour rendre notre RAM plus générique, nous ajoutons des paramètres de taille de données et d'adresses.
+Nous ajoutons donc les généricités \texttt{DATA\_LENGTH} et \texttt{ADDR\_LENGTH} qui permettront de définir la taille de la RAM\@.
+
+\begin{lstlisting}[caption={Nouvelle entité de la RAM}, label={lst:ram_entity}]
+entity sync_ram is
+  generic (
+    ADDR_LENGHT : integer := 10;
+    DATA_LENGHT : integer := 8
+  );
+  port (
+    clock   : in  std_logic;
+    we      : in  std_logic;
+    address : in  unsigned((ADDR_LENGHT - 1) downto 0);
+    datain  : in  unsigned((DATA_LENGHT - 1) downto 0);
+    dataout : out unsigned((DATA_LENGHT - 1) downto 0)
+  );
+end entity sync_ram;
+\end{lstlisting}
+
+\subsection{Ajout de la fonctionnalité du Chip Select}
+
+
