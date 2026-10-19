@@ -1,0 +1,57 @@
+\documentclass[a4paper,11pt]{article}
+
+\input{Param/UsePackage.tex}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    pdftitle={Rapport de projet},
+    pdfauthor={Auteur},
+    pdfkeywords={projet, rapport}
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    % --- Logo en haut ---
+    \includegraphics[width=0.9\linewidth]{Param/Polytech_Univ.png}\\[1.5cm]
+
+    % --- Titre principal ---
+    {\Huge \textbf{Rapport de système temps réel}}\\[0.5cm]
+    \rule{0.7\textwidth}{0.5pt}\\[0.8cm]
+    {\Large \textbf{ETN4 - SETR}}\\[1cm]
+    
+    % --- Mise en page en deux colonnes (élève / encadrants) ---
+    \noindent
+    \begin{minipage}[t]{0.48\textwidth}
+        \raggedright
+        {\large \textbf{Élèves :}}\\[0.3cm]
+        {\large
+        Nolan \textsc{BUCHET}}\\[0.6cm]
+        {\large
+        Maxence \textsc{BOULEAU}}\\[0.6cm]
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \raggedleft
+        {\large \textbf{Date :}}\\[0.3cm]
+        {\large
+        Septembre 2026}
+    \end{minipage}
+    \vfill
+\end{titlepage}
+
+\input{Param/param.tex}
+
+\tableofcontents
+
+\newpage
+
+\include{Includes/0_Contexte}
+
+\end{document}
