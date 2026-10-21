@@ -61,7 +61,7 @@ L'architecture RISC-V manipule différents modes d'adressage pour accéder aux d
 \subsubsection{Évolution vers le jeu d'instructions RV32IM}
 Le processeur fourni gère nativement le jeu d'instructions de base RV32I. Pour le rendre compatible avec l'extension \textbf{M} (\textit{Multiplication and Division}), les modifications matérielles suivantes sont requises :
 \begin{itemize}
-    \item Intégration d'unités de calcul arithmétique dédiées dans l'ALU pour la multiplication et la division entières (instructions \texttt{mul}, \texttt{div}.
+    \item Intégration d'unités de calcul arithmétique dédiées dans l'ALU pour la multiplication et la division entières (instructions \texttt{mul}, \texttt{div}).
     \item Décodage des nouveaux \textit{opcodes} et \textit{funct3/funct7} spécifiques à l'extension M dans l'unité de contrôle.
     \item Adaptation du programme de test (`instr.mem`) pour valider ces nouvelles opérations arithmétiques.
 \end{itemize}
