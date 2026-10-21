@@ -1,0 +1,497 @@
+m255
+K4
+z2
+!s11f MIXED_VERSIONS
+!s11e vcom 2022.1 2022.01, Jan 29 2022
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Apps/modeltech_pe_2022.1/examples
+Edecoder
+Z0 w1791191712
+Z1 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
+Z2 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
+Z3 DPx4 ieee 14 std_logic_1164 0 22 6<US`=mgl_dFdCEFF7J=m1
+!i122 370
+Z4 dZ:/5A-ETN/ME2-Langages_materiels
+Z5 8Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/decoder.vhd
+Z6 FZ:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/decoder.vhd
+l0
+L7 1
+Vc9bl:E:BG7PM4Nj][82f`1
+!s100 SYP0JE>D4RCHo4@m<Il>b2
+Z7 OP;C;2022.1;75
+32
+Z8 !s110 1792406904
+!i10b 1
+Z9 !s108 1792406904.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/decoder.vhd|
+Z11 !s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/decoder.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Artl
+R1
+R2
+R3
+Z14 DEx4 work 7 decoder 0 22 c9bl:E:BG7PM4Nj][82f`1
+!i122 370
+l16
+L15 13
+VP7]48=G?zLFa8za`mUA<h1
+!s100 E>aVEQ^_GOIZ7iT1:UM4[0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Edecoder_tb
+Z15 w1791191164
+R1
+R2
+R3
+!i122 371
+R4
+Z16 8Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/decoder_tb.vhd
+Z17 FZ:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/decoder_tb.vhd
+l0
+L5 1
+VLZS[<o0TazJX6OV3A4Mf^3
+!s100 7h<ihWGhASP:KnEmef]9c1
+R7
+32
+Z18 !s110 1792406905
+!i10b 1
+Z19 !s108 1792406905.000000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/decoder_tb.vhd|
+Z21 !s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/decoder_tb.vhd|
+!i113 1
+R12
+R13
+Abench
+R14
+R1
+R2
+R3
+DEx4 work 10 decoder_tb 0 22 LZS[<o0TazJX6OV3A4Mf^3
+!i122 371
+l13
+L8 40
+VHg_j2KjN^=mcXcoVd@]hY3
+!s100 W0Z4iT:@EQ1Z@A<OAkHbH0
+R7
+32
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R12
+R13
+Equadram
+Z22 w1791195830
+R1
+R2
+R3
+!i122 372
+R4
+Z23 8Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/quadram.vhd
+Z24 FZ:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/quadram.vhd
+l0
+L5 1
+V:M>h><IG04LQ^^jYjhW7T1
+!s100 V0EBHF@_mOA;lI:jL>ZNm3
+R7
+32
+R18
+!i10b 1
+R19
+Z25 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/quadram.vhd|
+Z26 !s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/quadram.vhd|
+!i113 1
+R12
+R13
+Artl
+Z27 DEx4 work 8 sync_ram 0 22 QGM2:?nB@D<Kg?Df@7:z>2
+R14
+R1
+R2
+R3
+Z28 DEx4 work 7 quadram 0 22 :M>h><IG04LQ^^jYjhW7T1
+!i122 372
+l24
+L20 33
+VNWn2dLZ>]FCTYMofTdWW?0
+!s100 =jUi^HjC0T@[7HkJzO2Rb2
+R7
+32
+R18
+!i10b 1
+R19
+R25
+R26
+!i113 1
+R12
+R13
+Equadram_tb
+Z29 w1791196086
+R1
+R2
+R3
+!i122 373
+R4
+Z30 8Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/quadram_tb.vhd
+Z31 FZ:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/quadram_tb.vhd
+l0
+L7 1
+Vl^KCn:CmKzD?PcB<m=<XU2
+!s100 :IOk`WNzSFnJe^oTl^NlX2
+R7
+32
+Z32 !s110 1792406906
+!i10b 1
+R19
+Z33 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/quadram_tb.vhd|
+Z34 !s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/quadram_tb.vhd|
+!i113 1
+R12
+R13
+Abench
+R28
+R1
+R2
+R3
+DEx4 work 10 quadram_tb 0 22 l^KCn:CmKzD?PcB<m=<XU2
+!i122 373
+l17
+L10 76
+VE4Y`7I9:zik8d;9UO[@1j0
+!s100 cT_mIdOQoKCg>4l:o[Hjk1
+R7
+32
+R32
+!i10b 1
+R19
+R33
+R34
+!i113 1
+R12
+R13
+vQuadram_wrapper
+!s110 1792398462
+!i10b 1
+!s100 <5YK1cAh1J5V3ie]9[dh23
+IP_zdX9V7@F:BXm``Mncdb0
+R4
+w1792398459
+Z35 8Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc-2-AIT.v
+Z36 FZ:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc-2-AIT.v
+!i122 174
+L0 10 20
+Z37 VDg1SIo80bB@j0V0VzS_@n1
+Z38 OP;L;2022.1;75
+r1
+!s85 0
+31
+!s108 1792398461.000000
+Z39 !s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc-2-AIT.v|
+Z40 !s90 -reportprogress|300|-work|work|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc-2-AIT.v|
+!i113 1
+Z41 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z42 tCvgOpt 0
+n@quadram_wrapper
+Eram_tb
+Z43 w1791189796
+R1
+R2
+R3
+!i122 369
+R4
+Z44 8Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/ram_tb.vhd
+Z45 FZ:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/ram_tb.vhd
+l0
+L7 1
+V`>2ZAz4PzZOQf=m9]YDIn1
+!s100 E:<]SMaDIjP@5N?FV5zQn0
+R7
+32
+R8
+!i10b 1
+R9
+Z46 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/ram_tb.vhd|
+Z47 !s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/ram_tb.vhd|
+!i113 1
+R12
+R13
+Abench2
+R27
+R1
+R2
+R3
+Z48 DEx4 work 6 ram_tb 0 22 `>2ZAz4PzZOQf=m9]YDIn1
+!i122 369
+l88
+L78 73
+V:;6j?8==GjE;ZzK:9PZ771
+!s100 ;VTFK^aJP5lT[QSJY[YF]0
+R7
+32
+R8
+!i10b 1
+R9
+R46
+R47
+!i113 1
+R12
+R13
+Abench
+R27
+R1
+R2
+R3
+R48
+!i122 369
+l18
+L10 67
+VLRGI98Ig<F1`<zzGLlA^e2
+!s100 gaZ=QJWFLD@MBZ8KAl@LN2
+R7
+32
+R8
+!i10b 1
+R9
+R46
+R47
+!i113 1
+R12
+R13
+Esync_ram
+Z49 w1791192919
+R1
+R2
+R3
+!i122 368
+R4
+Z50 8Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/ramchip.vhd
+Z51 FZ:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/ramchip.vhd
+l0
+L12 1
+VQGM2:?nB@D<Kg?Df@7:z>2
+!s100 >G3CI897j7JPKJ>=ENQCj3
+R7
+32
+Z52 !s110 1792406903
+!i10b 1
+Z53 !s108 1792406903.000000
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/ramchip.vhd|
+Z55 !s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle de RAM simple-20261005/ramchip.vhd|
+!i113 1
+R12
+R13
+Artl
+R1
+R2
+R3
+R27
+!i122 368
+l32
+L26 24
+VRNjFWgLF60fNULBB2C=]A1
+!s100 Q]:j3[?`odEKXZV?Zm0G_2
+R7
+32
+R52
+!i10b 1
+R53
+R54
+R55
+!i113 1
+R12
+R13
+vsystem
+R32
+!i10b 1
+!s100 fzhTAJ8l>G`deIoMHobEC2
+I9CYznbWfn3RDV6`nRBz;[1
+R4
+w1792406854
+R35
+R36
+!i122 374
+L0 10 189
+R37
+R38
+r1
+!s85 0
+31
+Z56 !s108 1792406906.000000
+R39
+R40
+!i113 1
+R41
+R42
+Esystem_top
+Z57 w1792401366
+R1
+R2
+R3
+!i122 376
+R4
+Z58 8Z:/5A-ETN/ME2-Langages_materiels/ram_proc.vhd
+Z59 FZ:/5A-ETN/ME2-Langages_materiels/ram_proc.vhd
+l0
+L5 1
+V8:c]V8:XJi:nQW4EJ4SAS0
+!s100 cI82G<KIVj2C@J4bMV^[Q2
+R7
+32
+Z60 !s110 1792406907
+!i10b 1
+Z61 !s108 1792406907.000000
+Z62 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/ram_proc.vhd|
+Z63 !s107 Z:/5A-ETN/ME2-Langages_materiels/ram_proc.vhd|
+!i113 1
+R12
+R13
+Artl
+R28
+DPx7 verilog 8 vl_types 0 22 P_cIh0I4AM[Slnb4Oe`Ag2
+DEx4 work 6 system 0 22 Dg1SIo80bB@j0V0VzS_@n1
+R1
+R2
+R3
+Z64 DEx4 work 10 system_top 0 22 8:c]V8:XJi:nQW4EJ4SAS0
+!i122 376
+l23
+L12 42
+VX44MH<W1h37VeND1:OD]G1
+!s100 AXf[emR62Rce:GNY=eWRN0
+R7
+32
+R60
+!i10b 1
+R61
+R62
+R63
+!i113 1
+R12
+R13
+vtb_system
+!s110 1792399013
+!i10b 1
+!s100 _?JEBEXE2?V=9^13WEkb[2
+IaCoHCE^NXTA>^7;QdoiQD2
+R4
+w1792398353
+8Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc_tb.v
+FZ:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc_tb.v
+!i122 186
+Z65 L0 3 35
+R37
+R38
+r1
+!s85 0
+31
+!s108 1792399013.000000
+!s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc_tb.v|
+!i113 1
+R41
+R42
+Etb_system_top
+Z66 w1792404260
+R1
+R2
+R3
+!i122 377
+R4
+Z67 8Z:/5A-ETN/ME2-Langages_materiels/tb_system_top.vhd
+Z68 FZ:/5A-ETN/ME2-Langages_materiels/tb_system_top.vhd
+l0
+L5 1
+Vgg13oA<Q@XkaA>SD7@zeh1
+!s100 nm:5nBLCL63og_6KGiK9A2
+R7
+32
+R60
+!i10b 1
+R61
+Z69 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/tb_system_top.vhd|
+Z70 !s107 Z:/5A-ETN/ME2-Langages_materiels/tb_system_top.vhd|
+!i113 1
+R12
+R13
+Asim
+R64
+R1
+R2
+R3
+Z71 DEx4 work 13 tb_system_top 0 22 gg13oA<Q@XkaA>SD7@zeh1
+!i122 377
+l17
+Z72 L8 48
+Z73 V>LOYS`W8k_bSm_>eH`J>S1
+Z74 !s100 @z_h9NKz?2mNXa0BB8heT0
+R7
+32
+R60
+!i10b 1
+R61
+R69
+R70
+!i113 1
+R12
+R13
+vtb_top
+R32
+!i10b 1
+!s100 3<_[MN_JM8h^S0?B;ikG;0
+Ij1EQ1NWQ4Y5PkmX6D8KV53
+R4
+w1792399004
+8Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc_AIT_tb.v
+FZ:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc_AIT_tb.v
+!i122 375
+R65
+R37
+R38
+r1
+!s85 0
+31
+R56
+!s107 Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc_AIT_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|Z:/5A-ETN/ME2-Langages_materiels/Modèle processeur-20261005/riscvproc_AIT_tb.v|
+!i113 1
+R41
+R42
+vtop
+!s110 1792399597
+!i10b 1
+!s100 IWVd1SGPeK2ljERCzK<[l2
+IV<2=95G9d5;b]]Y^Qi@2[3
+R4
+w1792399593
+R35
+R36
+!i122 191
+L0 10 175
+R37
+R38
+r1
+!s85 0
+31
+!s108 1792399597.000000
+R39
+R40
+!i113 1
+R41
+R42

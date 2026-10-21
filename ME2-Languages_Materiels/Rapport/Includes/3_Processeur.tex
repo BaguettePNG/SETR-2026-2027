@@ -1,0 +1,113 @@
+\section{Prise en main d'un modèle de processeur}
+
+\subsection{RISC-V RV32I et chargement des instructions}
+
+Dans un premier temps, nous avons étudié le jeu d'instructions RISC-V RV32I et chargé les instructions dans la mémoire du processeur. Un \textit{testbench} a été créé afin de simuler le processeur et de vérifier le bon fonctionnement des instructions. 
+
+L'exemple ci-dessous illustre le chargement d'un programme de test :
+
+\begin{lstlisting}[caption={Exemple de chargement d'instructions}, label={lst:load_instructions}]
+// instructions at address 0x0
+@0
+00200093 // addi x1, x0, 2
+00400113 // addi x2, x0, 4
+00110133 // add x2, x2, x1
+001150b3 // srl x1, x2, x1
+0420a023 // sw x2, 64(x1)
+00100073 // ebreak
+\end{lstlisting}
+
+Le chronogramme ci-dessous (Figure~\ref{fig:processor_1}) met en évidence l'exécution séquentielle de ces instructions :
+\begin{itemize}
+    \item Le registre \texttt{x1} est initialisé à 2, puis \texttt{x2} à 4.
+    \item Leur addition est stockée dans \texttt{x2}.
+    \item Un décalage logique à droite de \texttt{x2} par \texttt{x1} est affecté à \texttt{x1}.
+    \item Enfin, la valeur de \texttt{x2} est sauvegardée en mémoire à l'adresse calculée par l'offset 64 et la valeur de \texttt{x1}.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/4.png}
+    \caption{Chronogramme du processeur avec le jeu d'instructions RV32I}
+    \label{fig:processor_1}
+\end{figure}
+
+Les figures suivantes détaillent respectivement le comportement interne des registres (Figure~\ref{fig:processor_2}) et l'écriture effective des données dans l'espace mémoire.
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/4.png}
+    \caption{Détail des opérations dans les registres}
+    \label{fig:processor_2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/4.png}
+    \caption{Validation du stockage de la valeur en mémoire}
+    \label{fig:processor_3}
+\end{figure}
+
+\subsection{Analyse des modes d'adressage et extension RV32IM}
+
+\subsubsection{Modes d'adressage}
+L'architecture RISC-V manipule différents modes d'adressage pour accéder aux données :
+\begin{itemize}
+    \item  \textbf{Adressage immédiat :} La valeur de la donnée est directement encodée au sein même de l'instruction (ex: \texttt{addi x1, x0, 2}).
+    \item  \textbf{Adressage direct :} L'adresse de la mémoire ciblée est explicitement fournie dans l'instruction.
+    \item  \textbf{Adressage indirect (basé sur un registre) :} L'adresse mémoire effective est contenue dans un registre, souvent combinée avec un décalage constant (\textit{offset}), comme dans l'instruction de stockage \texttt{sw x2, 64(x1)}[cite: 3].
+\end{itemize}
+
+\subsubsection{Évolution vers le jeu d'instructions RV32IM}
+Le processeur fourni gère nativement le jeu d'instructions de base RV32I. Pour le rendre compatible avec l'extension \textbf{M} (\textit{Multiplication and Division}), les modifications matérielles suivantes sont requises :
+\begin{itemize}
+    \item Intégration d'unités de calcul arithmétique dédiées dans l'ALU pour la multiplication et la division entières (instructions \texttt{mul}, \texttt{div}.
+    \item Décodage des nouveaux \textit{opcodes} et \textit{funct3/funct7} spécifiques à l'extension M dans l'unité de contrôle.
+    \item Adaptation du programme de test (`instr.mem`) pour valider ces nouvelles opérations arithmétiques.
+\end{itemize}
+
+\subsection{Passage du jeu d'instructions RV32I au jeu RV32IM}
+
+Voici les modifications apportées au code Verilog du processeur pour supporter l'extension M :
+
+\begin{lstlisting}[caption={Ajout de l'extension M dans le processeur}, label={lst:processor_extension_m}]
+// Add functions RV32IM
+`define MUL   {3'b000, 7'b0000001}
+`define DIV   {3'b100, 7'b0000001}
+
+// Addictionnal function
+`MUL: regs[`RD] <= regs[`RS1] * regs[`RS2];
+`DIV: regs[`RD] <= regs[`RS1] / regs[`RS2];
+\end{lstlisting}
+
+Nous modifions également le fichier `instr.mem` pour inclure des instructions :
+\\
+
+\begin{lstlisting}[caption={Instructions pour l'extension M}, label={lst:processor_extension_m_instr}]
+// div
+00200093 // addi x1, x0, 2
+00400113 // addi x2, x0, 4
+02114133 // div x2, x2, x1
+
+// mul
+00200093 // addi x1, x0, 2
+00400113 // addi x2, x0, 4
+02110133 // mul x2, x2, x1
+\end{lstlisting}
+
+Voici le chronogramme résultant de l'exécution de ces instructions (Figure~\ref{fig:processor_4}) :
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/5.png}
+    \caption{Chronogramme du processeur pour multiplication}
+    \label{fig:processor_4}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/5.png}
+    \caption{Chronogramme du processeur pour division}
+    \label{fig:processor_5}
+\end{figure}

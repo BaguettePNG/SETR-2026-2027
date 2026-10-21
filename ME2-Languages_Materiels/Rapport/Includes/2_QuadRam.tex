@@ -1,0 +1,89 @@
+\section{Création du Bloc QuadRAM}
+
+\subsection{Conception et validation du décodeur d'adresses}
+
+Un décodeur d'adresses générique a été conçu pour piloter les signaux \texttt{cs} des blocs RAM à partir des bits de poids fort de l'adresse. Son fonctionnement a été validé par simulation (Figure~\ref{fig:decoder}).
+
+\begin{lstlisting}[caption={Décodeur d'adresses générique}, label={lst:decoder}]
+entity decoder is
+  generic(SEL_LENGTH : INTEGER := 2);
+  port (
+    address : in  unsigned(SEL_LENGTH - 1 downto 0);
+    cs      : out unsigned((2**SEL_LENGTH) - 1 downto 0)
+  );
+end entity;
+
+architecture RTL of decoder is
+begin
+  process(address) is
+  begin
+    cs <= (others => '0');
+    cs(to_integer(address)) <= '1';
+  end process;
+end architecture;
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/3.png}
+    \caption{Chronogramme du décodeur d'adresses}
+    \label{fig:decoder}
+\end{figure}
+
+\subsection{Instanciation de 4 blocs SyncRam}
+
+L'entité \texttt{QuadRAM} intègre un décodeur d'adresses et une boucle \texttt{for...generate} pour instancier les blocs mémoire. Le décodeur analyse les bits de poids fort de l'adresse pour piloter individuellement les signaux \texttt{cs} de chaque RAM, tandis que les autres signaux (horloge, écriture et données) sont mutualisés.
+\\
+
+\begin{lstlisting}[caption={QuadRAM}, label={lst:quadram}]
+DECODER : entity work.decoder(RTL)
+generic map (
+    SEL_LENGTH => 2  
+)
+port map (
+    cs      => cs_array,    
+    address => address(9 downto 8)   
+);
+
+GenRam : for i in 0 to (2**2) - 1 generate 
+    Ram : entity work.sync_ram(RTL)
+    generic map (
+        DataLength => 8,
+        AddrLength => 8
+    )
+    port map (
+        cs      => cs_array(i),
+        clock   => clock,
+        we      => we,
+        address => address(7 downto 0),
+        datain  => datain,
+        dataout => dataout
+    );
+end generate;
+\end{lstlisting}
+
+\subsection{Généralisation de l'architecture}
+
+Pour généraliser l'architecture de la RAM, nous avons ajouté des généricités pour la taille des données et des adresses. Cela permet de définir la taille de la RAM en fonction des besoins spécifiques du projet.
+\\
+
+\begin{lstlisting}[caption={QuadRAM Généralisée}, label={lst:quadram_gene}]
+	generic(ADDR_SELECT : INTEGER := 2;
+		    ADDR_LENGHT : INTEGER := 10;
+		    DATA_LENGHT : INTEGER := 8
+	);
+\end{lstlisting}
+
+\subsection{Validation de la QuadRAM}
+
+Afin de valider le fonctionnement de la QuadRAM, nous avons réalisé une simulation en utilisant un test bench. Le chronogramme obtenu (Figure~\ref{fig:quadram}) montre que la QuadRAM fonctionne correctement, avec les signaux \texttt{cs} activés pour chaque bloc RAM en fonction des bits de poids fort de l'adresse.
+\\
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/4.png}
+    \caption{Chronogramme de la QuadRAM}
+    \label{fig:quadram}
+\end{figure}
+
+

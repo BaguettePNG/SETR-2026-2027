@@ -8,6 +8,8 @@ Nous récupérons le modèle \texttt{ramchip.vhd} et son testbench afin de pouvo
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/1.png}
+    \caption{Chronogramme de la RAM}
+    \label{fig:ram}
 \end{figure}
 
 Dans le chronogramme ci-dessus, nous observons que notre simulation représente correctement le comportement d'une RAM\@.
@@ -58,6 +60,37 @@ entity sync_ram is
 end entity sync_ram;
 \end{lstlisting}
 
-\subsection{Ajout de la fonctionnalité du Chip Select}
+\subsection{Ajout du Chip Select}
 
+L'ajout du signal asynchrone \texttt{cs} permet de contrôler l'accès à la RAM et de placer ses sorties en haute impédance ($\text{'Z'}$) en cas d'inactivité, en vue de la création du \texttt{QuadRAM}.
 
+\begin{lstlisting}[caption={Ajout du signal CS}, label={lst:ram_entity_cs}]
+entity sync_ram is
+  generic(DataLength : INTEGER := 8; AddrLength : INTEGER := 8);
+  port (
+    cs    : in std_logic;
+    clock : in std_logic;
+    ...
+  );
+end entity;
+
+architecture RTL of sync_ram is
+  ...
+begin
+  process(clock) is
+  begin
+    if rising_edge(clock) and cs = '1' then
+      -- Ecriture synchronisee
+    end if;
+  end process;
+
+  dataout <= ram(to_integer(unsigned(read_address))) when cs = '1' else (others => 'Z');
+end architecture;
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+%    \includegraphics[width=0.8\textwidth]{Images/2.png}
+    \caption{Chronogramme de la RAM avec le signal CS}
+    \label{fig:ram_cs}
+\end{figure}

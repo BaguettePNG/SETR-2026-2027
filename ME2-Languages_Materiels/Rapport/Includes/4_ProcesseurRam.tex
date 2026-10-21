@@ -1,0 +1,103 @@
+\section{Intégration Système : Processeur + Mémoire}
+
+\subsection{Modification du processeur}
+
+Le processeur a été modifié pour déporter son stockage de données vers la mémoire externe \texttt{QuadRAM}, en intégrant les bus d'adresses, de données et les signaux de contrôle nécessaires ($\text{\texttt{we}}$, $\text{\texttt{clk}}$, $\text{\texttt{rst}}$)[cite: 5].
+
+\begin{lstlisting}[caption={Interface externe du processeur}, label={lst:processor_ram}]
+module system (
+  input wire clk, rst,
+  output reg [11:0] mem_addr,
+  output reg [31:0] mem_wdata,
+  input  wire [31:0] mem_rdata,
+  output reg         mem_we
+);
+\end{lstlisting}
+
+\subsection{Création d'un bloc Top-Level}
+
+Un composant \textit{Top-Level} rédigé en VHDL relie le processeur (en Verilog) et le bloc \texttt{QuadRAM}, en assurant la conversion des types entre les signaux standards et les vecteurs non signés.
+
+\begin{lstlisting}[caption={Extrait du Top-Level système}, label={lst:top_level}]
+entity system_top is
+    Port (
+        clk : in STD_LOGIC;
+        rst : in STD_LOGIC
+    );
+end entity system_top;
+
+architecture RTL of system_top is
+
+    signal mem_addr  : std_logic_vector(11 downto 0);
+    signal mem_wdata : std_logic_vector(31 downto 0);
+    signal mem_rdata : std_logic_vector(31 downto 0);
+    signal mem_we    : std_logic;
+
+    signal quadram_addr  : unsigned(11 downto 0);
+    signal quadram_wdata : unsigned(31 downto 0);
+    signal quadram_rdata : unsigned(31 downto 0);
+
+begin
+
+    quadram_addr  <= unsigned(mem_addr);
+    quadram_wdata <= unsigned(mem_wdata);
+    mem_rdata     <= std_logic_vector(quadram_rdata);
+
+    processor_inst : entity work.system
+        port map (
+            clk       => clk,
+            rst       => rst,
+            mem_addr  => mem_addr,
+            mem_wdata => mem_wdata,
+            mem_rdata => mem_rdata,
+            mem_we    => mem_we
+        );
+
+    quadram_inst : entity work.quadram
+        generic map (
+            ADDR_SELECT => 2,
+            ADDR_LENGHT => 12,
+            DATA_LENGHT => 32
+        )
+        port map (
+            clock    => clk,
+            we       => mem_we,
+            address  => quadram_addr,
+            datain   => quadram_wdata,
+            dataout  => quadram_rdata
+        );
+
+end architecture RTL;
+\end{lstlisting}
+
+\subsection{Validation du système intégral}
+
+Dans le même esprit que pour la validation du modèle processeur, nous validons notre système intégral en simulant l'exécution d'un programme de test. 
+Le chronogramme ci-dessous (Figure~\ref{fig:processor_ram}) illustre le fonctionnement du processeur en interaction avec la mémoire \texttt{QuadRAM}.
+\\
+
+\begin{itemize}
+    \item Réalisation d'une addition ( X1 = 2; X2 = 4; X2 = X1 + X2; )
+    \item Sotckage dans la mémoire ( X2 = 6; @addr = 0; )
+    \item Réalisation d'une multiplication ( X1 = 2; X2 = 4; X2 = X1 * X2; )
+    \item Sotckage dans la mémoire ( X2 = 8; @addr = 1; )
+    \item Réalisation d'une division ( X1 = 2; X2 = 4; X2 = X2 / X1; )
+    \item Sotckage dans la mémoire ( X2 = 2; @addr = 2; )
+    \item Lecture de la mémoire ( @addr = 0; X2 = 6; )
+\end{itemize}
+
+Voici le choronogramme obtenu (Figure~\ref{fig:processor_ram}) :
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/5.png}
+    \caption{Opération addition, multiplication et division du processeur avec la QuadRAM}
+    \label{fig:processor_4}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{Images/5.png}
+    \caption{Opération lecture de la mémoire du processeur avec la QuadRAM}
+    \label{fig:processor_4}
+\end{figure}

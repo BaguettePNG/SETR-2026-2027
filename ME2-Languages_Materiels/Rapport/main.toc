@@ -4,4 +4,19 @@
 \contentsline {subsection}{\numberline {2.1}Validation du fonctionnement de la RAM}{3}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Modification du code de la RAM}{3}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Ajout de la généricité de la RAM}{3}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Ajout de la fonctionnalité du Chip Select}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.4}Ajout du Chip Select}{4}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Création du Bloc QuadRAM}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Conception et validation du décodeur d'adresses}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Instanciation de 4 blocs SyncRam}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Généralisation de l'architecture}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Validation de la QuadRAM}{6}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Prise en main d'un modèle de processeur}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}RISC-V RV32I et chargement des instructions}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Analyse des modes d'adressage et extension RV32IM}{7}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Modes d'adressage}{7}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Évolution vers le jeu d'instructions RV32IM}{8}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}Passage du jeu d'instructions RV32I au jeu RV32IM}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Intégration Système : Processeur + Mémoire}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Modification du processeur}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Création d'un bloc Top-Level}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Validation du système intégral}{11}{subsection.5.3}%
