@@ -17,7 +17,7 @@ L'exemple ci-dessous illustre le chargement d'un programme de test :
 00100073 // ebreak
 \end{lstlisting}
 
-Le chronogramme ci-dessous (Figure~\ref{fig:processor_1}) met en évidence l'exécution séquentielle de ces instructions :
+Les chronogrammes ci-dessous mettent en évidence l'exécution séquentielle de ces instructions, avec le comportement des registres (Figure~\ref{fig:processor_2}) et l'écriture en mémoire (Figure~\ref{fig:processor_3}) :
 \begin{itemize}
     \item Le registre \texttt{x1} est initialisé à 2, puis \texttt{x2} à 4.
     \item Leur addition est stockée dans \texttt{x2}.
@@ -29,14 +29,14 @@ Les figures suivantes détaillent respectivement le comportement interne des reg
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{Images/3_INSTRU_0_modified.png}
+    \includegraphics[width=0.99\textwidth]{3_INSTRU_0_modified.png}
     \caption{Détail des opérations dans les registres}
     \label{fig:processor_2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{Images/3_INSTRU_1_modified.png}
+    \includegraphics[width=0.99\textwidth]{3_INSTRU_1_modified.png}
     \caption{Validation du stockage de la valeur en mémoire}
     \label{fig:processor_3}
 \end{figure}
@@ -92,7 +92,7 @@ Voici le chronogramme résultant de l'exécution de ces instructions (Figure~\re
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{Images/3_division_modified.png}
+    \includegraphics[width=0.99\textwidth]{3_division_modified.png}
     \caption{Chronogramme du processeur pour division}
     \label{fig:processor_4}
 \end{figure}
@@ -100,7 +100,7 @@ Voici le chronogramme résultant de l'exécution de ces instructions (Figure~\re
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{Images/3_multiplication_modified.png}
+    \includegraphics[width=0.99\textwidth]{3_multiplication_modified.png}
     \caption{Chronogramme du processeur pour multiplication}
     \label{fig:processor_5}
 \end{figure}
