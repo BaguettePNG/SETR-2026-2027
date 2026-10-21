@@ -19,10 +19,10 @@ L'exemple ci-dessous illustre le chargement d'un programme de test :
 
 Les chronogrammes ci-dessous mettent en évidence l'exécution séquentielle de ces instructions, avec le comportement des registres (Figure~\ref{fig:processor_2}) et l'écriture en mémoire (Figure~\ref{fig:processor_3}) :
 \begin{itemize}
-    \item Le registre \texttt{x1} est initialisé à 2, puis \texttt{x2} à 4.
-    \item Leur addition est stockée dans \texttt{x2}.
-    \item Un décalage logique à droite de \texttt{x2} par \texttt{x1} est affecté à \texttt{x1}.
-    \item Enfin, la valeur de \texttt{x2} est sauvegardée en mémoire à l'adresse calculée par l'offset 64 et la valeur de \texttt{x1}.
+    \item Etape 1 : le registre \texttt{x1} est initialisé à 2, puis \texttt{x2} à 4.
+    \item Etape 2 : leur addition est stockée dans \texttt{x2}.
+    \item Etape 3 : un décalage logique à droite de \texttt{x2} par \texttt{x1} est affecté à \texttt{x1}.
+    \item Etape 4 : enfin, la valeur de \texttt{x2} est sauvegardée en mémoire à l'adresse calculée par l'offset 64 et la valeur de \texttt{x1}.
 \end{itemize}
 
 Les figures suivantes détaillent respectivement le comportement interne des registres (Figure~\ref{fig:processor_2}) et l'écriture effective des données dans l'espace mémoire.
