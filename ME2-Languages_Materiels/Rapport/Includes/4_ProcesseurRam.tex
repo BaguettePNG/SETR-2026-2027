@@ -2,7 +2,7 @@
 
 \subsection{Modification du processeur}
 
-Le processeur a été modifié pour déporter son stockage de données vers la mémoire externe \texttt{QuadRAM}, en intégrant les bus d'adresses, de données et les signaux de contrôle nécessaires ($\text{\texttt{we}}$, $\text{\texttt{clk}}$, $\text{\texttt{rst}}$).
+Le processeur a été modifié pour déporter son stockage de données vers la mémoire externe \texttt{quadram}, en intégrant les bus \texttt{mem\_addr}, \texttt{mem\_wdata} et \texttt{mem\_rdata}, ainsi que les signaux de contrôle \texttt{mem\_we}, \texttt{clk} et \texttt{rst}.
 
 \begin{lstlisting}[caption={Interface externe du processeur}, label={lst:processor_ram}]
 module system (
@@ -73,17 +73,17 @@ end architecture RTL;
 \subsection{Validation du système intégral}
 
 Dans le même esprit que pour la validation du modèle processeur, nous validons notre système intégral en simulant l'exécution d'un programme de test. 
-Le chronogramme ci-dessous (Figure~\ref{fig:processor_ram}) illustre le fonctionnement du processeur en interaction avec la mémoire \texttt{QuadRAM}.
+Le chronogramme ci-dessous (Figure~\ref{fig:processor_ram}) illustre le fonctionnement du processeur en interaction avec la mémoire \texttt{quadram}.
 \\
 
 \begin{itemize}
-    \item Réalisation d'une addition ( X1 = 2; X2 = 4; X2 = X1 + X2; )
-    \item Stockage dans la mémoire ( X2 = 6; @addr = 0; )
-    \item Réalisation d'une multiplication ( X1 = 2; X2 = 4; X2 = X1 * X2; )
-    \item Stockage dans la mémoire ( X2 = 8; @addr = 1; )
-    \item Réalisation d'une division ( X1 = 2; X2 = 4; X2 = X2 / X1; )
-    \item Stockage dans la mémoire ( X2 = 2; @addr = 2; )
-    \item Lecture de la mémoire ( @addr = 0; X2 = 6; )
+    \item Réalisation d'une addition (\texttt{x1} = 2 ; \texttt{x2} = 4 ; \texttt{x2} = \texttt{x1} + \texttt{x2})
+    \item Stockage de \texttt{x2} = 6 à l’adresse 0
+    \item Réalisation d'une multiplication (\texttt{x1} = 2 ; \texttt{x2} = 4 ; \texttt{x2} = \texttt{x1} * \texttt{x2})
+    \item Stockage de \texttt{x2} = 8 à l’adresse 1
+    \item Réalisation d'une division (\texttt{x1} = 2 ; \texttt{x2} = 4 ; \texttt{x2} = \texttt{x2} / \texttt{x1})
+    \item Stockage de \texttt{x2} = 2 à l’adresse 2
+    \item Lecture de la mémoire à l’adresse 0 dans \texttt{x2} (valeur attendue : 6)
 \end{itemize}
 
 Voici le choronogramme obtenu (Figure~\ref{fig:processor_ram}) :
@@ -91,6 +91,6 @@ Voici le choronogramme obtenu (Figure~\ref{fig:processor_ram}) :
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.99\textwidth]{4_OPERATION_modified.png}
-    \caption{Opération addition, multiplication, division et lecture de la mémoire du processeur avec la QuadRAM}
+    \caption{Opérations arithmétiques et échanges mémoire du processeur avec la \texttt{quadram}}
     \label{fig:processor_ram}
 \end{figure}

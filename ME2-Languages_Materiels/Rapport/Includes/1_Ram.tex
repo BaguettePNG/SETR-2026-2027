@@ -15,21 +15,18 @@ Nous récupérons le modèle \texttt{ramchip.vhd} et son testbench afin de pouvo
 Dans le chronogramme ci-dessus, nous observons que notre simulation représente correctement le comportement d'une RAM\@.
 \\
 
-Le bon fonctionnement se valide en commençant par mettre \texttt{WE} à 1. Sans celui-ci, la RAM ne peut pas écrire de données.
-Ensuite, à chaque front d'horloge, nous mettons à jours une addresse dans laquelle nous voulons écrire une donnée. 
-Nous mettons ensuite à jour la donnée que nous voulons écrire dans la RAM. 
+Le bon fonctionnement se valide en activant \texttt{we}. À chaque front montant de \texttt{clock}, nous définissons l’adresse \texttt{address} de la donnée à écrire, puis nous plaçons cette donnée sur \texttt{datain}.
 \\
 
 \begin{itemize}
-    \item A 20 ns : Ecriture de 01 à l'addresse 001 -> DataOut = 01
-    \item A 30 ns : Ecriture de 02 à l'addresse 002 -> DataOut = 02
-    \item A 40 ns : Ecriture de 03 à l'addresse 003 -> DataOut = 03, et ainsi de suite
+    \item À 20 ns : écriture de 01 à l’adresse 001 ; \texttt{dataout} restitue 01
+    \item À 30 ns : écriture de 02 à l’adresse 002 ; \texttt{dataout} restitue 02
+    \item À 40 ns : écriture de 03 à l’adresse 003 ; \texttt{dataout} restitue 03, et ainsi de suite
     \\
 \end{itemize}
 
 Un effet de décalage apparait, la valeur affichée correspond toujours à la donnée appliquée au cycle précédent.
-Exemple entre $20\text{ ns}$ et $30\text{ ns}$, Address vaut 001, DataIn vaut 01, et DataOut restitue 00. Celui 
-ci est normal car notre Ram est synchrone, et ne restitue donc la donnée qu'au cycle suivant.
+Exemple entre $20\text{ ns}$ et $30\text{ ns}$, \texttt{address} vaut 001, \texttt{datain} vaut 01 et \texttt{dataout} restitue 00. Cet effet est normal car notre RAM est synchrone et ne restitue donc la donnée qu'au cycle suivant.
 \\
 
 
@@ -42,7 +39,7 @@ afin de pouvoir effectuer des opérations arithmétiques sur les adresses. Le fo
 \subsection{Ajout de la généricité de la RAM}
 
 Pour rendre notre RAM plus générique, nous ajoutons des paramètres de taille de données et d'adresses.
-Nous ajoutons donc les généricités \texttt{DATA\_LENGTH} et \texttt{ADDR\_LENGTH} qui permettront de définir la taille de la RAM\@.
+Nous ajoutons donc les généricités \texttt{DATA\_LENGHT} et \texttt{ADDR\_LENGHT} qui permettent de définir la taille de la RAM\@.
 
 \begin{lstlisting}[caption={Nouvelle entité de la RAM}, label={lst:ram_entity}]
 entity sync_ram is
@@ -60,13 +57,13 @@ entity sync_ram is
 end entity sync_ram;
 \end{lstlisting}
 
-\subsection{Ajout du Chip Select}
+\subsection{Ajout du signal de sélection}
 
-L'ajout du signal asynchrone \texttt{cs} permet de contrôler l'accès à la RAM et de placer ses sorties en haute impédance ($\text{'Z'}$) en cas d'inactivité, en vue de la création du \texttt{QuadRAM}.
+L'ajout du signal \texttt{cs} permet de contrôler l'accès à la RAM et de placer sa sortie en haute impédance (\texttt{'Z'}) lorsqu'elle n'est pas sélectionnée, en vue de la création de la \texttt{quadram}.
 
-\begin{lstlisting}[caption={Ajout du signal CS}, label={lst:ram_entity_cs}]
+\begin{lstlisting}[caption={Ajout du signal cs}, label={lst:ram_entity_cs}]
 entity sync_ram is
-  generic(DataLength : INTEGER := 8; AddrLength : INTEGER := 8);
+  generic(DataLenght : INTEGER := 8; AddrLenght : INTEGER := 8);
   port (
     cs    : in std_logic;
     clock : in std_logic;
@@ -91,6 +88,10 @@ end architecture;
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{1_RAM_CS_modified.png}
-    \caption{Chronogramme de la RAM avec le signal CS}
+    \caption{Chronogramme de la RAM avec le signal \texttt{cs}}
     \label{fig:ram_cs}
 \end{figure}
+
+La Figure~\ref{fig:ram_cs} présente le chronogramme de la RAM après l’ajout du signal de sélection \texttt{cs}. Lorsque \texttt{cs} vaut \texttt{'1'}, la RAM est sélectionnée : l’écriture est autorisée sur un front montant de \texttt{clock} si \texttt{we} est également actif, et la sortie \texttt{dataout} restitue la donnée mémorisée à l’adresse demandée. Lorsque \texttt{cs} vaut \texttt{'0'}, la mémoire n’est pas sélectionnée et sa sortie est placée en haute impédance (\texttt{'Z'}), afin de ne pas perturber un éventuel bus partagé. \\
+
+Le chronogramme illustre le comportement synchrone de l’écriture : les données de \texttt{datain} sont enregistrées sur un front montant de \texttt{clock}, lorsque \texttt{cs} et \texttt{we} sont actifs. La sortie \texttt{dataout} est, quant à elle, conditionnée par \texttt{cs}. L’ajout de ce signal complète donc le fonctionnement de la RAM en permettant de contrôler son accès.

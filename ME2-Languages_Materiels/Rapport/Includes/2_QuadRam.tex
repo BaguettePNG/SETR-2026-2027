@@ -6,10 +6,10 @@ Un décodeur d'adresses générique a été conçu pour piloter les signaux \tex
 
 \begin{lstlisting}[caption={Décodeur d'adresses générique}, label={lst:decoder}]
 entity decoder is
-  generic(SEL_LENGTH : INTEGER := 2);
+  generic(SEL_LENGHT : INTEGER := 2);
   port (
-    address : in  unsigned(SEL_LENGTH - 1 downto 0);
-    cs      : out unsigned((2**SEL_LENGTH) - 1 downto 0)
+    address : in  unsigned((SEL_LENGHT - 1) downto 0);
+    cs      : out unsigned(((2**SEL_LENGHT) - 1) downto 0)
   );
 end entity;
 
@@ -30,6 +30,9 @@ end architecture;
     \label{fig:decoder}
 \end{figure}
 
+Ainsi, sur le chronogramme de la Figure~\ref{fig:decoder}, le vecteur de sortie \texttt{cs} évolue en fonction de la valeur du signal d’entrée \texttt{address}. Pour une adresse codée sur deux bits, quatre combinaisons sont possibles : \texttt{00}, \texttt{01}, \texttt{10} et \texttt{11}. Chacune active un bit de \texttt{cs}, tandis que les autres restent à zéro. Ce comportement permet de sélectionner le bloc mémoire correspondant à l’adresse fournie. La simulation confirme le bon fonctionnement du décodeur et son utilisation dans l’architecture de la \texttt{quadram}.
+
+
 \subsection{Instanciation de 4 blocs SyncRam}
 
 L'entité \texttt{QuadRAM} intègre un décodeur d'adresses et une boucle \texttt{for...generate} pour instancier les blocs mémoire. Le décodeur analyse les bits de poids fort de l'adresse pour piloter individuellement les signaux \texttt{cs} de chaque RAM, tandis que les autres signaux (horloge, écriture et données) sont mutualisés.
@@ -38,18 +41,18 @@ L'entité \texttt{QuadRAM} intègre un décodeur d'adresses et une boucle \textt
 \begin{lstlisting}[caption={QuadRAM}, label={lst:quadram}]
 DECODER : entity work.decoder(RTL)
 generic map (
-    SEL_LENGTH => 2  
+    SEL_LENGHT => 2
 )
 port map (
-    cs      => cs_array,    
-    address => address(9 downto 8)   
+    cs      => cs_array,
+    address => address(9 downto 8)
 );
 
 GenRam : for i in 0 to (2**2) - 1 generate 
     Ram : entity work.sync_ram(RTL)
     generic map (
-        DataLength => 8,
-        AddrLength => 8
+        DataLenght => 8,
+        AddrLenght => 8
     )
     port map (
         cs      => cs_array(i),
@@ -86,3 +89,4 @@ Afin de valider le fonctionnement de la QuadRAM, nous avons réalisé une simula
     \label{fig:quadram}
 \end{figure}
 
+La Figure~\ref{fig:quadram} présente le chronogramme de validation de la \texttt{quadram}, composée de quatre blocs RAM pilotés par un décodeur d’adresses. Les bits de poids fort de \texttt{address} activent le bit correspondant de \texttt{cs\_array}, tandis que les bits de poids faible définissent l’adresse interne de la banque sélectionnée. Ainsi, une seule RAM est activée parmi les quatre instances. Cette simulation vérifie le décodage et la sélection des mémoires, nécessaires à l’utilisation de la \texttt{quadram} comme mémoire modulaire.
