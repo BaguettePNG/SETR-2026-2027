@@ -1,1 +1,21 @@
 \section{Contexte}
+
+Ce rapport s'inscrit dans l'étude de cas E2 « Conception de SoC » du département ETN de Polytech Nantes (ETN5, semestre 9). L'étude de cas consiste à constituer un groupe de concepteurs qui développe, par binômes, les différents composants d'un système sur puce (SoC) afin d'aller le plus loin possible dans sa réalisation.
+\\
+
+\section{Introduction}
+
+L'I2C est une liaison série synchrone à deux fils, SCL pour l'horloge et SDA pour les données, très répandue pour relier un processeur à des capteurs, des mémoires ou des convertisseurs. 
+\\
+
+Ce document présente la conception d'un contrôleur I2C fonctionnant en mode maître. Le circuit génère l'horloge SCL et les conditions START et STOP, émet l'adresse de l'esclave, puis envoie ou reçoit jusqu'à 8 octets avec gestion des acquittements. 
+La démarche suit le plan imposé par l'étude de cas, du besoin jusqu'au circuit :
+\\
+
+\begin{itemize}
+    \item Le cahier des charges
+    \item Les spécifications
+    \item La conception
+    \item La description VHDL et la synthèse
+    \item Le bilan
+\end{itemize}

@@ -99,3 +99,37 @@ nAS et nBE0-nBE1 actifs pendant le cycle, RnW à 1 pour une lecture et à 0 pour
 émettre ; les lectures concernent le statut et les données reçues.
 \\
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Images/1_CDC/Cycle_cours.png}
+    \caption{Chronogramme des cycles d'échange}
+\end{figure}
+
+Les cycles d'écriture permettent soit de configurer les registres du contrôleur I2C, soit d'envoyer des données à transmettre sur la ligne série.
+\\
+
+Les cycles de lecture servent soit à consulter les registres d'état du contrôleur, soit à récupérer les données reçues via la liaison série.
+\\
+
+La figure suivante illustre le format des trames de données émises et reçues sur le bus série.
+\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Images/1_CDC/Trame_I2C_W.png}
+    \caption{Chronogramme des trames I2C - Ecriture}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Images/1_CDC/Trame_I2C_R.png}
+    \caption{Chronogramme des trames I2C - Lecture}
+\end{figure}
+
+\subsection{Contraintes}
+
+Les contraintes considérées sont celles du projet. Le composant est développé en VHDL
+dans l'environnement HDL Designer de Mentor Graphics (saisie, simulation sous
+ModelSim, synthèse). Le circuit doit pouvoir être connecté sur le bus imposé, sans
+modification de ce dernier, et être réutilisable comme IP.
+\\
