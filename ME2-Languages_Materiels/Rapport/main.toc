@@ -24,4 +24,4 @@
 \contentsline {subsection}{\numberline {6.1}Modification du code existant}{16}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Contraintes de synthèse et préservation des signaux sous Vivado}{16}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}Analyse de la synthèse et de l'implémentation}{16}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Conclusion}{21}{section.7}%
+\contentsline {section}{\numberline {7}Conclusion}{20}{section.7}%
