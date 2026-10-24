@@ -1,6 +1,0 @@
-// instructions at address 0x0
-@0
-00200093 // addi x1, x0, 2
-00400113 // addi x2, x0, 4
-02110133 // mul x2, x2, x1
-00100073 // ebreak
