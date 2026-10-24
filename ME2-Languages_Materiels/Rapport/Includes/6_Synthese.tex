@@ -1,6 +1,6 @@
 \section{Mise en œuvre matérielle et synthèse sous Vivado}
 
-Pour rendre le système synthétisable sur un FPGA AMD (anciennement Xilinx) sous Vivado, certaines modifications et précautions sont nécessaires. Le code matériel doit être parfaitement compatible avec les contraintes de synthèse et les ressources logiques disponibles sur le composant cible.
+Pour rendre le système complet synthétisable sur un FPGA Xilinx avec Vivado, deux adaptations principales sont nécessaires : modifier le modèle de mémoire pour utiliser les blocs mémoire physiques du FPGA et rendre le processeur réellement synchrone sur le signal d'horloge. Le code doit également respecter les contraintes de synthèse et les ressources disponibles sur le composant cible.
 \\
 
 \subsection{Modification du code existant}
