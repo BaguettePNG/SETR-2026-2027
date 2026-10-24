@@ -77,13 +77,10 @@ Le chronogramme ci-dessous (Figure~\ref{fig:processor_ram}) illustre le fonction
 \\
 
 \begin{itemize}
-    \item Réalisation d'une addition (\texttt{x1} = 2 ; \texttt{x2} = 4 ; \texttt{x2} = \texttt{x1} + \texttt{x2})
-    \item Stockage de \texttt{x2} = 6 à l’adresse 0
-    \item Réalisation d'une multiplication (\texttt{x1} = 2 ; \texttt{x2} = 4 ; \texttt{x2} = \texttt{x1} * \texttt{x2})
-    \item Stockage de \texttt{x2} = 8 à l’adresse 1
-    \item Réalisation d'une division (\texttt{x1} = 2 ; \texttt{x2} = 4 ; \texttt{x2} = \texttt{x2} / \texttt{x1})
-    \item Stockage de \texttt{x2} = 2 à l’adresse 2
-    \item Lecture de la mémoire à l’adresse 0 dans \texttt{x2} (valeur attendue : 6)
+    \item \textcolor{red}{\textbf{Étape 1}} : le processeur additionne \texttt{x1} = 2 et \texttt{x2} = 4, puis écrit le résultat 6 à l'adresse mémoire 0.
+    \item \textcolor{blue}{\textbf{Étape 2}} : il multiplie \texttt{x1} = 2 par \texttt{x2} = 4, puis écrit le résultat 8 à l'adresse mémoire 1.
+    \item \textcolor{magenta}{\textbf{Étape 3}} : il divise \texttt{x2} = 4 par \texttt{x1} = 2, puis écrit le résultat 2 à l'adresse mémoire 2.
+    \item \textcolor{orange}{\textbf{Étape 4}} : il lit le contenu de l'adresse mémoire 0 et charge la valeur 6 dans \texttt{x2}.
 \end{itemize}
 
 Voici le chronogramme obtenu (Figure~\ref{fig:processor_ram}) :
@@ -95,4 +92,4 @@ Voici le chronogramme obtenu (Figure~\ref{fig:processor_ram}) :
     \label{fig:processor_ram}
 \end{figure}
 
-Le chronogramme montre les opérations arithmétiques puis l'écriture de leurs résultats en mémoire : 6 à l'adresse 0, 8 à l'adresse 1 et 2 à l'adresse 2. Enfin, la lecture de l'adresse 0 place bien la valeur attendue, 6, sur \texttt{mem\_rdata}.
+Les repères colorés du chronogramme suivent ces quatre étapes : le rouge identifie l'addition et l'écriture de 6 à l'adresse 0 ; le bleu, la multiplication et l'écriture de 8 à l'adresse 1 ; le rose, la division et l'écriture de 2 à l'adresse 2 ; enfin, l'orange correspond à la lecture de l'adresse 0 et au chargement de la valeur 6 dans \texttt{x2}.
