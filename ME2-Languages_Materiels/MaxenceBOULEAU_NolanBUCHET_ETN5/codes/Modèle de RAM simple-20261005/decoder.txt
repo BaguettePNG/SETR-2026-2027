@@ -1,0 +1,25 @@
+-- Decoder
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.Numeric_Std.all;
+
+entity decoder is
+	generic(SEL_LENGHT : INTEGER := 2);
+  port (
+    address : in  unsigned((SEL_LENGHT - 1) downto 0);
+    select  : out unsigned(((2**SEL_LENGHT) - 1) downto 0)
+  );
+end entity sync_ram;
+
+architecture RTL of sync_ram is
+begin
+
+	process(address)
+	begin
+		select <= (others => '0');
+
+		select(to_interger(address)) <= '1';
+	end process
+
+end architecture RTL;

@@ -1,0 +1,27 @@
+@0
+// --- 1. ADDITION (Résultat stocké à l'adresse 0) ---
+00200093 // addi x1, x0, 2       (x1 = 2)
+00400113 // addi x2, x0, 4       (x2 = 4)
+00110133 // add  x2, x2, x1      (x2 = 2 + 4 = 6)
+00202023 // sw   x2, 0(x0)       (memory[0] = x2 = 6)
+
+// --- 2. MULTIPLICATION (Résultat stocké à l'adresse 1) ---
+00200093 // addi x1, x0, 2       (x1 = 2)
+00400113 // addi x2, x0, 4       (x2 = 4)
+02110133 // mul  x2, x2, x1      (x2 = 4 * 2 = 8)
+002020a3 // sw   x2, 1(x0)       (memory[1] = x2 = 8)
+
+// --- 3. DIVISION (Résultat stocké à l'adresse 2) ---
+00200093 // addi x1, x0, 2
+00400113 // addi x2, x0, 4
+02114133 // div x2, x2, x1
+00202123 // sw   x2, 2(x0)       (memory[2] = x2 = 2)
+
+00200093 // addi x1, x0, 0
+00400113 // addi x2, x0, 0
+
+// --- 4. OPÉRATION DE LECTURE (Load) ---
+00002183 // lw   x2, 0(x0)       (x3 = memory[0] -> charge 6 dans x3 pour vérification)
+
+// --- 5. FIN DU PROGRAMME ---
+00100073 // ebreak               (Arrêt de la simulation)
