@@ -4,6 +4,8 @@
 
 Dans un premier temps, nous avons étudié le jeu d'instructions RISC-V RV32I et chargé les instructions dans la mémoire du processeur. Un \textit{testbench} a été créé afin de simuler le processeur et de vérifier le bon fonctionnement des instructions. 
 
+Le processeur n'exécute pas directement les mnémoniques assembleur lisibles par un humain, comme \texttt{addi} ou \texttt{add} : chaque instruction doit être encodée en code machine selon le format défini par le jeu d'instructions. Ces mots binaires de 32 bits sont représentés en hexadécimal. Chaque groupe de huit chiffres hexadécimaux correspond ainsi à une instruction.
+
 L'exemple ci-dessous illustre le chargement d'un programme de test :
 
 \begin{lstlisting}[caption={Exemple de chargement d'instructions}, label={lst:load_instructions}]

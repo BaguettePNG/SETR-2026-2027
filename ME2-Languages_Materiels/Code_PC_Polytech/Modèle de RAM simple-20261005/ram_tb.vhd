@@ -139,7 +139,6 @@ begin
     while address /= "1111111111" loop
       address <= (unsigned(address) + 1);
       wait until rising_edge(clock);
-      -- ok should permanently go false on the first error
       ok <= ok and dataout = (unsigned(address(7 downto 0)) - 1);
     end loop;
 
