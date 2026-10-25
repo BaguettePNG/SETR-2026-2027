@@ -7,11 +7,11 @@ end entity tb_system_top;
 
 architecture sim of tb_system_top is
 
-    -- Déclaration des signaux de test
+    -- Dï¿½claration des signaux de test
     signal clk : STD_LOGIC := '0';
     signal rst : STD_LOGIC := '1';
 
-    -- Période de l'horloge (10 ns -> 100 MHz)
+    -- Pï¿½riode de l'horloge (10 ns -> 100 MHz)
     constant CLK_PERIOD : time := 10 ns;
 
 begin
@@ -23,7 +23,7 @@ begin
             rst => rst
         );
 
-    -- Processus de génération de l'horloge
+    -- Processus de gï¿½nï¿½ration de l'horloge
     clk_process : process
     begin
         clk <= '0';
@@ -35,16 +35,13 @@ begin
     -- Processus de simulation (Stimulus)
     stim_process : process
     begin
-        -- Maintien du reset actif au démarrage
+        -- Maintien du reset actif au dï¿½marrage
         rst <= '1';
         wait for 30 ns; -- On maintient le reset pendant 3 cycles complets
         
-        -- Relâchement propre du reset sur un flanc descendant pour éviter les conflits
         wait until falling_edge(clk);
         rst <= '0';
         
-        -- On laisse tourner (le $finish de ton code Verilog arrêtera 
-        -- automatiquement la simulation lorsque l'instruction EBREAK sera atteinte)
         wait for 2000 ns;
         
         -- Fin de simulation de secours si aucun EBREAK n'est atteint
