@@ -6,7 +6,7 @@
 
 La tâche \verb|Horloge| définit un délai d'attente de 1000 ms (\verb|HORLOGE_TASK_DELAY 1000|). L'état de la LED changeant toutes les secondes, un cycle complet (allumé puis éteint) dure 2 secondes. Le système fonctionne donc correctement avec une fréquence de clignotement confirmée de 0,5 Hz. 
 
-\begin{lstlisting}
+\begin{lstlisting}[style=code]
 void vCodeBlinkLED (void * pvParameters)
 {
     /* declaration de variables locales de la tache */
@@ -54,4 +54,3 @@ Le résultat de cette exécution sur la carte SAMD21, confirmant la fréquence d
         \item \verb|heap_5.c| : Similaire à \verb|heap_4.c|, mais permet de répartir le tas (heap) sur plusieurs zones mémoires non contiguës.
     \end{itemize}
 \end{itemize}
-

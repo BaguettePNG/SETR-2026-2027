@@ -1,4 +1,104 @@
-% LOGO IUT
+% =====================================================================
+% 1. ENCODAGE, POLICES ET LANGUE
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{gensymb}
+
+% =====================================================================
+% 2. MISE EN PAGE ET GÉOMÉTRIE
+% =====================================================================
+\usepackage[a4paper, margin=3.2cm, top=3.5cm, bottom=4cm]{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{eso-pic}
+
+% =====================================================================
+% 3. MATHÉMATIQUES ET SCIENCES
+% =====================================================================
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{siunitx}
+
+% =====================================================================
+% 4. GRAPHIQUES, TRACÉS ET DIAGRAMMES
+% =====================================================================
+\usepackage{graphicx}
+\graphicspath{{Param/}, {Images/}}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, chains, positioning, babel}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\usepackage[european, straightvoltages, RPvoltages]{circuitikz}
+
+% =====================================================================
+% 5. TABLEAUX
+% =====================================================================
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{makecell}
+\usepackage{rotating}
+
+% =====================================================================
+% 6. STRUCTURATION, BLOCS ET COULEURS
+% =====================================================================
+\usepackage[table]{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{listings}
+\lstdefinestyle{code}{
+    language=C,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue!70!black},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{red!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=8pt,
+    frame=single,
+    rulecolor=\color{gray!50},
+    framesep=5pt,
+    breaklines=true,
+    breakatwhitespace=false,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    tabsize=4,
+    literate=
+        {à}{{\`a}}1 {â}{{\^a}}1 {ä}{{\"a}}1
+        {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {ë}{{\"e}}1
+        {î}{{\^i}}1 {ï}{{\"i}}1
+        {ô}{{\^o}}1 {ö}{{\"o}}1
+        {ù}{{\`u}}1 {û}{{\^u}}1 {ü}{{\"u}}1
+        {ÿ}{{\"y}}1 {ç}{{\c{c}}}1 {œ}{{\oe}}1
+        {À}{{\`A}}1 {Â}{{\^A}}1 {Ä}{{\"A}}1
+        {É}{{\'E}}1 {È}{{\`E}}1 {Ê}{{\^E}}1 {Ë}{{\"E}}1
+        {Î}{{\^I}}1 {Ï}{{\"I}}1
+        {Ô}{{\^O}}1 {Ö}{{\"O}}1
+        {Ù}{{\`U}}1 {Û}{{\^U}}1 {Ü}{{\"U}}1
+        {Ÿ}{{\"Y}}1 {Ç}{{\c{C}}}1 {Œ}{{\OE}}1
+}
+\usepackage[most]{tcolorbox}
+\usepackage{pifont}
+\usepackage{lipsum}
+
+% =====================================================================
+% 7. LIENS HYPERTEXTES (Toujours charger en dernier !)
+% =====================================================================
+\usepackage[hidelinks]{hyperref}
+
+% LOGO UNIVERSITÉ DE NANTES
 \AddToHook{shipout/background}{%
   \begin{textblock*}{100cm}(100cm,100cm) % Ajustez les coordonnées pour décaler l'image
   \begin{tikzpicture}[remember picture, overlay]
@@ -77,5 +177,4 @@
 
 \renewcommand{\headrulewidth}{1pt} % Header rule thickness
 \renewcommand{\footrulewidth}{1pt} % Footer rule thickness
-
 
