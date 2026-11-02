@@ -43,7 +43,38 @@ Le résultat de cette exécution sur la carte SAMD21, confirmant le bon fonction
 
 Le code source complet de l'application temps-réel FreeRTOS est présenté ci-dessous : \\
 
-\begin{verbatim}
+\begin{lstlisting}[
+    language=C,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue!70!black},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{red!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=8pt,
+    frame=single,
+    rulecolor=\color{gray!50},
+    framesep=5pt,
+    breaklines=true,
+    breakatwhitespace=false,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    tabsize=4,
+    literate=
+        {à}{{\`a}}1 {â}{{\^a}}1 {ä}{{\"a}}1
+        {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {ë}{{\"e}}1
+        {î}{{\^i}}1 {ï}{{\"i}}1
+        {ô}{{\^o}}1 {ö}{{\"o}}1
+        {ù}{{\`u}}1 {û}{{\^u}}1 {ü}{{\"u}}1
+        {ÿ}{{\"y}}1 {ç}{{\c{c}}}1 {œ}{{\oe}}1
+        {À}{{\`A}}1 {Â}{{\^A}}1 {Ä}{{\"A}}1
+        {É}{{\'E}}1 {È}{{\`E}}1 {Ê}{{\^E}}1 {Ë}{{\"E}}1
+        {Î}{{\^I}}1 {Ï}{{\"I}}1
+        {Ô}{{\^O}}1 {Ö}{{\"O}}1
+        {Ù}{{\`U}}1 {Û}{{\^U}}1 {Ü}{{\"U}}1
+        {Ÿ}{{\"Y}}1 {Ç}{{\c{C}}}1 {Œ}{{\OE}}1
+]
 /* Inclusion des bibliothèques */
 #include <asf.h>
 #include <stdio.h>
@@ -361,4 +392,4 @@ void taskDisplay(void *pvParameters)
         }
     }
 }
-\end{verbatim}
+\end{lstlisting}
