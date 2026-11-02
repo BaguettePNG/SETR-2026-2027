@@ -100,6 +100,7 @@
 
 % LOGO UNIVERSITÉ DE NANTES
 \AddToHook{shipout/background}{%
+  \ifnum\value{page}>1
   \begin{textblock*}{100cm}(100cm,100cm) % Ajustez les coordonnées pour décaler l'image
   \begin{tikzpicture}[remember picture, overlay]
     \node[anchor=north east, inner sep=18pt] at (current page.north east) {%
@@ -107,10 +108,12 @@
     };
   \end{tikzpicture}%
   \end{textblock*}
+  \fi
 }
 
 
 \AddToHook{shipout/background}{%
+  \ifnum\value{page}>1
   \begin{textblock*}{100cm}(100cm,100cm) % Ajustez '15cm' pour déplacer l'image plus à droite
     \begin{tikzpicture}[remember picture, overlay]
       \node[anchor=north west, inner sep=25pt] at (current page.north west) {%
@@ -118,51 +121,60 @@
       };
     \end{tikzpicture}%
   \end{textblock*}
+  \fi
 }
 
 
 % NOM FICHIER
 \AddToHook{shipout/background}{%
+  \ifnum\value{page}>1
   \begin{textblock*}{1cm}(1cm,1cm)
   \end{textblock*}
   \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor=north, inner sep=50pt] at (current page.north) {%    
-    {\fontsize{10}{13}\selectfont ME1 - Système temps réel : Rapport de projet}
+    \node[anchor=north, inner sep=50pt, font=\normalfont\normalsize] at (current page.north) {%
+    ME1 - Système temps réel : Rapport de projet
     };
   \end{tikzpicture}%
+  \fi
 }
 
 % PAGE
 \AddToHook{shipout/background}{%
+  \ifnum\value{page}>1
   \begin{textblock*}{1cm}(1cm,1cm)
   \end{textblock*}
   \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor=south, inner sep=50pt] at (current page.south) {%
+    \node[anchor=south, inner sep=50pt, font=\normalfont\normalsize] at (current page.south) {%
     \thepage/\pageref{LastPage}
     };
   \end{tikzpicture}%
+  \fi
 }
 
 % NOM PRENOM
 \AddToHook{shipout/background}{%
+  \ifnum\value{page}>1
   \begin{textblock*}{1cm}(1cm,1cm)
   \end{textblock*}
   \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor=south west, inner sep=50pt] at (current page.south west) {%    
-    {\fontsize{10}{13}\selectfont Maxence BOULEAU \& Nolan BUCHET}
+    \node[anchor=south west, inner sep=50pt, font=\normalfont\normalsize] at (current page.south west) {%
+    Maxence BOULEAU \& Nolan BUCHET
     };
   \end{tikzpicture}%
+  \fi
 }
 
 % DATE
 \AddToHook{shipout/background}{%
+  \ifnum\value{page}>1
   \begin{textblock*}{1cm}(1cm,1cm)
   \end{textblock*}
   \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor=south east, inner sep=50pt] at (current page.south east) {%    
-    {\fontsize{10}{13}\selectfont Octobre 2026}
+    \node[anchor=south east, inner sep=50pt, font=\normalfont\normalsize] at (current page.south east) {%
+    Novembre 2026
     };
   \end{tikzpicture}%
+  \fi
 }
 
 
@@ -177,4 +189,3 @@
 
 \renewcommand{\headrulewidth}{1pt} % Header rule thickness
 \renewcommand{\footrulewidth}{1pt} % Footer rule thickness
-
