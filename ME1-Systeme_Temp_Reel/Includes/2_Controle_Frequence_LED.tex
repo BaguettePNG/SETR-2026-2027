@@ -1,11 +1,11 @@
 \section{Contrôle de la fréquence de clignotement de la LED}
 
-Pour modifier la fréquence de clignotement de la LED dans le projet \verb|OLED1|, plusieurs approches sont possibles à partir du code fourni (\verb|mainLeds-BP_Control.c|) :
+Pour modifier la fréquence de clignotement de la LED dans le projet \textit{OLED1}, plusieurs approches sont possibles à partir du code fourni (\textit{mainLeds-BP\_Control.c}) :
 
 \begin{itemize}
-    \item \textbf{Modifier la macro de délai (Solution la plus directe) :} La fréquence est régie par la tâche \verb|vCodeClock|, qui s'endort pendant \verb|HORLOGE_TASK_DELAY| ticks (défini à 250) avant de libérer le sémaphore \verb|xSem_H1|. Augmenter ou diminuer la valeur de \verb|HORLOGE_TASK_DELAY| modifiera directement la fréquence de basculement de la LED. \\
+    \item \textbf{Modifier la macro de délai (Solution la plus directe) :} La fréquence est régie par la tâche \textit{vCodeClock}, qui s'endort pendant \textit{HORLOGE\_TASK\_DELAY} ticks (défini à 250) avant de libérer le sémaphore \textit{xSem\_H1}. Augmenter ou diminuer la valeur de \textit{HORLOGE\_TASK\_DELAY} modifiera directement la fréquence de basculement de la LED. \\
     
-    \item \textbf{Modifier la fréquence du système (Tick Rate) :} La fonction \verb|vTaskDelay()| attend un nombre de "ticks" de l'OS. En modifiant la constante \verb|configTICK_RATE_HZ| dans le fichier \verb|FreeRTOSConfig.h| (initialement fixée à 1000 Hz, soit 1 tick = 1 ms), on modifie la durée temporelle réelle d'un tick, et donc la vitesse d'exécution de toutes les tâches temporisées du système. \\
+    \item \textbf{Modifier la fréquence du système (Tick Rate) :} La fonction \textit{vTaskDelay()} attend un nombre de "ticks" de l'OS. En modifiant la constante \textit{configTICK\_RATE\_HZ} dans le fichier \textit{FreeRTOSConfig.h} (initialement fixée à 1000 Hz, soit 1 tick = 1 ms), on modifie la durée temporelle réelle d'un tick, et donc la vitesse d'exécution de toutes les tâches temporisées du système. \\
     
-    \item \textbf{Ajouter un diviseur logiciel dans la tâche de contrôle :} Dans la tâche \verb|vCodeLEDControl|, au lieu de changer l'état de la LED à chaque réception du sémaphore, on peut introduire un compteur local (variable entière). La LED ne changera d'état que lorsque ce compteur aura atteint un certain seuil, divisant ainsi la fréquence d'horloge.
+    \item \textbf{Ajouter un diviseur logiciel dans la tâche de contrôle :} Dans la tâche \textit{vCodeLEDControl}, au lieu de changer l'état de la LED à chaque réception du sémaphore, on peut introduire un compteur local (variable entière). La LED ne changera d'état que lorsque ce compteur aura atteint un certain seuil, divisant ainsi la fréquence d'horloge.
 \end{itemize}

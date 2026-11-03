@@ -2,9 +2,9 @@
 
 \subsection{Clignotement de la LED (Partie 3.4)}
 
-À partir du code fourni en annexe et en suivant les étapes de création du projet sur Microchip Studio, nous avons observé le bon clignotement de la \verb|LED0|. \\
+À partir du code fourni en annexe et en suivant les étapes de création du projet sur Microchip Studio, nous avons observé le bon clignotement de la \textit{LED0}. \\
 
-La tâche \verb|Horloge| définit un délai d'attente de 1000 ms (\verb|HORLOGE_TASK_DELAY 1000|). L'état de la LED changeant toutes les secondes, un cycle complet (allumé puis éteint) dure 2 secondes. Le système fonctionne donc correctement avec une fréquence de clignotement confirmée de 0,5 Hz. 
+La tâche \textit{Horloge} définit un délai d'attente de 1000 ms (\textit{HORLOGE\_TASK\_DELAY 1000}). L'état de la LED changeant toutes les secondes, un cycle complet (allumé puis éteint) dure 2 secondes. Le système fonctionne donc correctement avec une fréquence de clignotement confirmée de 0,5 Hz.
 
 \begin{lstlisting}[style=code]
 void vCodeBlinkLED (void * pvParameters)
@@ -39,18 +39,18 @@ Le résultat de cette exécution sur la carte SAMD21, confirmant la fréquence d
 \subsection{Réponses à l'étude du code FreeRTOS (Partie 3.5)}
 
 \begin{itemize}
-    \item \textbf{Procédure d'ordonnancement :} Dans le code générique (\verb|tasks.c|), la procédure chargée du changement de contexte et de la sélection de la prochaine tâche à exécuter est \verb|vTaskSwitchContext()| (qui utilise la macro \verb|taskSELECT_HIGHEST_PRIORITY_TASK()|). \\
+    \item \textbf{Procédure d'ordonnancement :} Dans le code générique (\textit{tasks.c}), la procédure chargée du changement de contexte et de la sélection de la prochaine tâche à exécuter est \textit{vTaskSwitchContext()} (qui utilise la macro \textit{taskSELECT\_HIGHEST\_PRIORITY\_TASK()}). \\
     
-    \item \textbf{Lien avec \texttt{FreeRTOSConfig.h} :} La politique d'ordonnancement est directement pilotée par les constantes de ce fichier, principalement \verb|configUSE_PREEMPTION| (qui active/désactive le mode préemptif) et \verb|configMAX_PRIORITIES|. \\
+    \item \textbf{Lien avec \textit{FreeRTOSConfig.h} :} La politique d'ordonnancement est directement pilotée par les constantes de ce fichier, principalement \textit{configUSE\_PREEMPTION} (qui active/désactive le mode préemptif) et \textit{configMAX\_PRIORITIES}. \\
     
-    \item \textbf{Adaptation de la politique :} Adapter fondamentalement la politique (par exemple vers un ordonnancement de type EDF) n'est pas trivial. Il faudrait directement modifier le code source du noyau dans \verb|tasks.c|, en particulier la procédure \verb|vTaskSwitchContext()| et l'organisation des listes de tâches (\verb|pxReadyTasksLists|). \\
+    \item \textbf{Adaptation de la politique :} Adapter fondamentalement la politique (par exemple vers un ordonnancement de type EDF) n'est pas trivial. Il faudrait directement modifier le code source du noyau dans \textit{tasks.c}, en particulier la procédure \textit{vTaskSwitchContext()} et l'organisation des listes de tâches (\textit{pxReadyTasksLists}). \\
     
     \item \textbf{Politiques de gestion de la mémoire (heap\_1 à heap\_5) :}
     \begin{itemize}
-        \item \verb|heap_1.c| : Allocation uniquement, aucune libération possible (déterministe, idéal pour les systèmes statiques).
-        \item \verb|heap_2.c| : Allocation et libération autorisées, algorithme \textit{best-fit}, mais sans fusion des blocs libres (risque de fragmentation).
-        \item \verb|heap_3.c| : Encapsule les fonctions standards \verb|malloc()| et \verb|free()| du compilateur pour les rendre \textit{thread-safe}.
-        \item \verb|heap_4.c| : Allocation et libération avec fusion automatique des blocs adjacents libres (défragmentation).
-        \item \verb|heap_5.c| : Similaire à \verb|heap_4.c|, mais permet de répartir le tas (heap) sur plusieurs zones mémoires non contiguës.
+        \item \textit{heap\_1.c} : Allocation uniquement, aucune libération possible (déterministe, idéal pour les systèmes statiques).
+        \item \textit{heap\_2.c} : Allocation et libération autorisées, algorithme \textit{best-fit}, mais sans fusion des blocs libres (risque de fragmentation).
+        \item \textit{heap\_3.c} : Encapsule les fonctions standards \textit{malloc()} et \textit{free()} du compilateur pour les rendre \textit{thread-safe}.
+        \item \textit{heap\_4.c} : Allocation et libération avec fusion automatique des blocs adjacents libres (défragmentation).
+        \item \textit{heap\_5.c} : Similaire à \textit{heap\_4.c}, mais permet de répartir le tas (heap) sur plusieurs zones mémoires non contiguës.
     \end{itemize}
 \end{itemize}

@@ -4,17 +4,17 @@ Pour intégrer le code source complet de FreeRTOS dans un projet sous Microchip 
 
 \begin{enumerate}
     \item \textbf{Ajout du noyau générique (Sources et Headers) :} 
-    Créer un dossier \verb|FreeRTOS| dans le répertoire \verb|src| du projet et y importer les fichiers sources de base (\verb|tasks.c|, \verb|queue.c|, \verb|list.c|, \verb|timers.c|, \verb|event_groups.c|, \verb|stream_buffer.c|, \verb|croutine.c|). Ces fichiers contiennent la logique du RTOS indépendante du matériel. Créer ensuite un sous-dossier \verb|include| pour y placer tous les fichiers d'en-tête (\verb|.h|) associés. \\
+    Créer un dossier \textit{FreeRTOS} dans le répertoire \textit{src} du projet et y importer les fichiers sources de base (\textit{tasks.c}, \textit{queue.c}, \textit{list.c}, \textit{timers.c}, \textit{event\_groups.c}, \textit{stream\_buffer.c}, \textit{croutine.c}). Ces fichiers contiennent la logique du RTOS indépendante du matériel. Créer ensuite un sous-dossier \textit{include} pour y placer tous les fichiers d'en-tête (\textit{.h}) associés. \\
 
     \item \textbf{Ajout de la couche matérielle (Portage) :} 
-    Créer l'arborescence \verb|FreeRTOS/portable/GCC/ARM_CM0| et y importer les fichiers \verb|port.c| et \verb|portmacro.h|. Ces fichiers font le lien direct avec l'architecture du microcontrôleur (Cortex-M0+ de la carte SAMD21) pour gérer les changements de contexte, la pile et les interruptions matérielles. \\
+    Créer l'arborescence \textit{FreeRTOS/\allowbreak portable/\allowbreak GCC/\allowbreak ARM\_CM0} et y importer les fichiers \textit{port.c} et \textit{portmacro.h}. Ces fichiers font le lien direct avec l'architecture du microcontrôleur (Cortex-M0+ de la carte SAMD21) pour gérer les changements de contexte, la pile et les interruptions matérielles. \\
 
     \item \textbf{Ajout du gestionnaire de mémoire :} 
-    Créer le dossier \verb|FreeRTOS/portable/MemMang| et y insérer le fichier définissant la politique d'allocation mémoire dynamique du noyau (ici \verb|heap_1.c|). \\
+    Créer le dossier \textit{FreeRTOS/\allowbreak portable/\allowbreak MemMang} et y insérer le fichier définissant la politique d'allocation mémoire dynamique du noyau (ici \textit{heap\_1.c}). \\
 
-    \item \textbf{Configuration du noyau (\texttt{FreeRTOSConfig.h}) :} 
-    Placer le fichier \verb|FreeRTOSConfig.h| dans le dossier \verb|src/config|. Ce fichier adapte l'OS à l'application en réglant l'horloge CPU (\verb|OSC8M|), la fréquence du tick système (\verb|configTICK_RATE_HZ|), la taille du tas (\verb|configTOTAL_HEAP_SIZE|), le nombre de priorités et la désactivation des fonctions inutilisées (hooks, traces, statistiques). Il fait aussi le lien entre les interruptions du RTOS et celles du processeur (\verb|SysTick_Handler| et \verb|PendSV_Handler|). \\
+    \item \textbf{Configuration du noyau (\textit{FreeRTOSConfig.h}) :}
+    Placer le fichier \textit{FreeRTOSConfig.h} dans le dossier \textit{src/config}. Ce fichier adapte l'OS à l'application en réglant l'horloge CPU (\textit{OSC8M}), la fréquence du tick système (\textit{configTICK\_RATE\_HZ}), la taille du tas (\textit{configTOTAL\_HEAP\_SIZE}), le nombre de priorités et la désactivation des fonctions inutilisées (hooks, traces, statistiques). Il fait aussi le lien entre les interruptions du RTOS et celles du processeur (\textit{SysTick\_Handler} et \textit{PendSV\_Handler}). \\
 
     \item \textbf{Configuration du compilateur (Include Paths) :} 
-    Dans les propriétés du projet (\textit{Toolchain $\rightarrow$ ARM/GNU C Compiler $\rightarrow$ Directories}), ajouter les chemins vers les dossiers \verb|FreeRTOS/include| et \verb|FreeRTOS/portable/GCC/ARM_CM0|. Cela permet au compilateur de trouver tous les fichiers \verb|.h| lors de la compilation.
+    Dans les propriétés du projet (\textit{Toolchain $\rightarrow$ ARM/GNU C Compiler $\rightarrow$ Directories}), ajouter les chemins vers les dossiers \textit{FreeRTOS/\allowbreak include} et \textit{FreeRTOS/\allowbreak portable/\allowbreak GCC/\allowbreak ARM\_CM0}. Cela permet au compilateur de trouver tous les fichiers \textit{.h} lors de la compilation.
 \end{enumerate}

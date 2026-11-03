@@ -1,0 +1,5 @@
+\section{Conclusion}
+
+En conclusion, ce projet a permis de concevoir et d'implanter avec succès une application embarquée temps-réel de mesure du temps de réaction, répondant fidèlement aux exigences du cahier des charges. L'intégration de l'exécutif FreeRTOS sur la cible Atmel SAMD21, couplée à la carte d'extension OLED1, a mis en évidence l'efficacité d'une architecture multitâche rigoureusement ordonnancée (tâches Horloge, Supervision, Observation et Affichage). \\
+
+La phase de mise en œuvre a permis de confronter la théorie à la réalité matérielle. Notamment, la gestion des accès concurrents aux périphériques de la carte d'extension a mis en lumière la nécessité d'implémenter des mécanismes d'exclusion mutuelle et de synchronisation robustes (mutex et sémaphores). Cela a démontré toute l'importance des systèmes d'exploitation temps-réel, dont l'API permet non seulement d'ordonnancer les tâches selon leurs priorités, mais aussi de garantir l'intégrité des données partagées dans des fenêtres temporelles strictes (avec une période d'observation validée à environ $1\text{ ms}$).

@@ -23,23 +23,30 @@ Pour concevoir cette application sous FreeRTOS, l'analyse fonctionnelle met en �
 \begin{itemize}
     \item \textbf{Tâches (Tasks) :} L'application est découpée en quatre tâches distinctes hiérarchisées par leurs priorités :
     \begin{enumerate}
-        \item \texttt{taskClock} (priorité haute) : Tâche périodique (cadencée à $1\text{ ms}$) servant d'horloge globale de référence.
-        \item \texttt{taskSupervision} : Tâche chargée de scruter l'état du bouton de démarrage pour basculer en mode observation.
-        \item \texttt{taskObservation} : Tâche centrale implémentant l'automate d'état, gérant les stimuli visuels et l'acquisition des boutons.
-        \item \texttt{taskDisplay} : Tâche d'affichage passive restituant les statistiques sur l'écran OLED.
+        \item \textit{taskClock} (priorité haute) : Tâche périodique (cadencée à $1\text{ ms}$) servant d'horloge globale de référence.
+        \item \textit{taskSupervision} : Tâche chargée de scruter l'état du bouton de démarrage pour basculer en mode observation.
+        \item \textit{taskObservation} : Tâche centrale implémentant l'automate d'état, gérant les stimuli visuels et l'acquisition des boutons.
+        \item \textit{taskDisplay} : Tâche d'affichage passive restituant les statistiques sur l'écran OLED.
     \end{enumerate}
-    \item \textbf{Sémaphores binaires :} \texttt{SemSupervision} et \texttt{SemObservation} synchronisent le réveil des tâches sur le tic d'horloge.
-    \item \textbf{Mutex (Exclusion Mutuelle) :} \texttt{mutex\_mode} et \texttt{mutex\_oled1} protègent respectivement le mode et les accès concurrents au bus de la carte OLED1.
-    \item \textbf{File de messages (Queue) :} \texttt{xQueueMeasurementResults} transfère le tableau des résultats statistiques vers l'affichage.
+    \item \textbf{Sémaphores binaires :} \textit{SemSupervision} et \textit{SemObservation} synchronisent le réveil des tâches sur le tic d'horloge.
+    \item \textbf{Mutex (Exclusion Mutuelle) :} \textit{mutex\_mode} et \textit{mutex\_oled1} protègent respectivement le mode et les accès concurrents au bus de la carte OLED1.
+    \item \textbf{File de messages (Queue) :} \textit{xQueueMeasurementResults} transfère le tableau des résultats statistiques vers l'affichage.
 \end{itemize}
 
 \subsection{Analyse et explication du code de l'application}
 
-Le programme s'articule autour de l'initialisation matérielle (\texttt{system\_init}, \texttt{oled1\_init}, \texttt{ConfigureMeasure}), de la création des objets FreeRTOS, puis du lancement de l'ordonnanceur (\texttt{vTaskStartScheduler}). Le cœur du système repose sur la machine à états de la tâche d'observation (\texttt{REPOS}, \texttt{ATTENTE}, \texttt{MESURE}, \texttt{ATTENTE\_MESURE}, \texttt{FIN\_MESURE}) qui gère l'enchaînement des 5 mesures chronométrées. \\
+Le programme s'articule autour de l'initialisation matérielle (\textit{system\_init}, \textit{oled1\_init}, \textit{ConfigureMeasure}), de la création des objets FreeRTOS, puis du lancement de l'ordonnanceur (\textit{vTaskStartScheduler}). Le cœur du système repose sur la machine à états de la tâche d'observation (\textit{REPOS}, \textit{ATTENTE}, \textit{MESURE}, \textit{ATTENTE\_MESURE}, \textit{FIN\_MESURE}) qui gère l'enchaînement des 5 mesures chronométrées. \\
 
 \subsection{Preuves de fonctionnement de l'application}
 
 Le bon comportement temporel de l'application a été validé sur la cible SAMD21 Xplained Pro avec la carte OLED1, garantissant une période d'observation stable voisine de $1\text{ ms}$ (mesurée précisément à $991\text{ }\mu\text{s}$). À l'issue de la série de mesures, les statistiques de temps de réaction de l'utilisateur enregistrées s'établissent comme suit : un temps minimal de $1116\text{ ms}$, un temps moyen de $2562\text{ ms}$, et un temps maximal de $6007\text{ ms}$. \\
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.99\linewidth]{Figures/chrono_observation.png}
+    \caption{Chronogramme d'exécution des tâches et mesure de la période d'observation}
+    \label{fig:chrono_observation}
+\end{figure}
 
 Le résultat de cette exécution sur la carte SAMD21, confirmant le bon fonctionnement de l'application, est visible via ce lien : \href{https://youtube.com/shorts/WNDGfWiWxSI?feature=share}{\textbf{voir la démonstration vidéo sur YouTube}}. \\
 
