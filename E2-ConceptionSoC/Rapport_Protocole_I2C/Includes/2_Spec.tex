@@ -47,16 +47,24 @@ Le tableau ci-après décrit les caractéristiques des relations identifiées :
     \label{tab:relations_es_i2c}
     \small
     \setlength{\tabcolsep}{4pt}
-    \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}p{1.7cm}|>{\centering\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
         \textbf{Nom de la relation} & \textbf{Sens} & \textbf{Nature} & \textbf{Nom du type} & \textbf{Valeur du type} \\ \hline
         DataReq & Entrée & Événementielle & DefRequest & (Read, Write) \\ \hline
         DataToSend & Entrée & Permanente & DefData & Array[0..7] of DefBit \\ \hline
+        DataReceived & Sortie & Permanente & DefData & Array[0..7] of DefBit \\ \hline
         Addr & Entrée & Permanente & DefAddr & Array[0..6] of DefBit \\ \hline
-        Config & Entrée & Permanente & DefConfig & IntMode + Speed + Direction + NbBytes \\ \hline
-        Status & Sortie & Permanente & DefStatus & ReceptionError + EmissionOK + ReceptionOK \\ \hline
+        Config & Entrée & Permanente & DefConfig & IntMode: DefIntMode + Speed: DefSpeed + NbBytes: DefNbBytes \\ \hline
+        Status & Sortie & Permanente & DefStatus & ReceptionError: DefBit + EmissionOK: DefBit + ReceptionOK: DefBit \\ \hline
         IT\_I2C & Sortie & Événementielle & - & - \\ \hline
         SDA & Bidirectionnel & Permanente & DefBit & (Active, Inactive) \\ \hline
         SCL & Sortie & Permanente & DefBit & (Active, Inactive) \\ \hline
     \end{tabularx}
 \end{table}
+
+\noindent Les types de données intermédiaires sont :
+\begin{itemize}
+    \item \textbf{DefIntMode} : IntReception: DefBit + IntEmission: DefBit
+    \item \textbf{DefSpeed} : (100k, 400k)
+    \item \textbf{DefNbBytes} : Integer
+\end{itemize}
