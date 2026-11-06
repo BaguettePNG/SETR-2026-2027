@@ -28,3 +28,35 @@ suivants :
     \includegraphics[width=0.95\linewidth]{Images/2_SPEC/Comportement_uc.pdf}
     \caption{Comportement de l'entité Système à uP}
 \end{figure}
+
+\subsection{Entrées/sorties du composant}
+
+La caractérissation de l'environnement permet de définir les entrées/sorties du composant. La figure suivante représente ces relations. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Images/2_SPEC/Relations entrées-sorties.pdf}
+    \caption{Entrées/sorties du composant}
+\end{figure}
+
+Le tableau ci-après décrit les caractéristiques des relations identifiées : 
+
+\begin{table}[htbp]
+    \centering
+    \caption{Caractéristiques des relations d'entrées-sorties du contrôleur I2C}
+    \label{tab:relations_es_i2c}
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}p{1.7cm}|>{\centering\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Nom de la relation} & \textbf{Sens} & \textbf{Nature} & \textbf{Nom du type} & \textbf{Valeur du type} \\ \hline
+        DataReq & Entrée & Événementielle & DefRequest & (Read, Write) \\ \hline
+        DataToSend & Entrée & Permanente & DefData & Array[0..7] of DefBit \\ \hline
+        Addr & Entrée & Permanente & DefAddr & Array[0..6] of DefBit \\ \hline
+        Config & Entrée & Permanente & DefConfig & IntMode + Speed + Direction + NbBytes \\ \hline
+        Status & Sortie & Permanente & DefStatus & ReceptionError + EmissionOK + ReceptionOK \\ \hline
+        IT\_I2C & Sortie & Événementielle & - & - \\ \hline
+        SDA & Bidirectionnel & Permanente & DefBit & (Active, Inactive) \\ \hline
+        SCL & Sortie & Permanente & DefBit & (Active, Inactive) \\ \hline
+    \end{tabularx}
+\end{table}
