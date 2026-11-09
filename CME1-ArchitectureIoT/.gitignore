@@ -1,0 +1,49 @@
+# Fichiers de compilation LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.xdv
+
+# Latexmk
+*.latexmk
+
+# Biber / BibTeX
+*.acn
+*.acr
+*.alg
+
+# MakeIndex
+*.ist
+
+# TikZ externals
+*.dpth
+*.md5
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.sav
+
+# VS Code
+.vscode/
+
+# PDF généré (décommente si tu ne veux pas versionner les PDF)
+# *.pdf
