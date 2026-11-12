@@ -77,7 +77,6 @@ Voici le diagramme d'activités pour le protocole I2C, qui décrit le comporteme
 \end{figure}
 
 \subsection{Spécification des registres}
-
 %% ------------------------------------------------------------
 %% Fragment à coller sous \subsection{Spécification des registres}
 %% Packages nécessaires : array, tabularx, float (déjà utilisés)
@@ -128,15 +127,15 @@ Ce registre regroupe la configuration du contrôleur. Il correspond à la relati
 \begin{tabular}{|l|*{8}{C{1.6cm}|}}
 \hline
 \textbf{Bit} & \textbf{7} & \textbf{6} & \textbf{5} & \textbf{4} & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} \\ \hline
-\textbf{Nom} & -- & -- & \multicolumn{2}{c|}{Speed[1:0]} & \multicolumn{2}{c|}{NbBytes[1:0]} & IntMode & Enable \\ \hline
-\textbf{Accès} & -- & -- & R/W & R/W & R/W & R/W & R/W & R/W \\ \hline
-\textbf{Reset} & -- & -- & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{Nom} & -- & \multicolumn{2}{c|}{Speed[1:0]} & \multicolumn{2}{c|}{NbBytes[1:0]} & \multicolumn{2}{c|}{IntMode[1:0]} & Enable \\ \hline
+\textbf{Accès} & -- & R/W & R/W & R/W & R/W & R/W & R/W & R/W \\ \hline
+\textbf{Reset} & -- & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
 \end{tabular}
 \end{table}
 
 \paragraph{Bits 15:9 -- ADDR[6:0]} Ces bits contiennent l'adresse 7~bits de l'esclave I2C ciblé.
 
-\paragraph{Bits 5:4 -- Speed[1:0]} Ces bits définissent la vitesse du bus. Ils ne sont pas synchronisés.
+\paragraph{Bits 6:5 -- Speed[1:0]} Ces bits définissent la vitesse du bus. Ils ne sont pas synchronisés.
 
 \begin{table}[H]
 \centering
@@ -151,7 +150,7 @@ Ce registre regroupe la configuration du contrôleur. Il correspond à la relati
 \end{tabularx}
 \end{table}
 
-\paragraph{Bits 3:2 -- NbBytes[1:0]} Ces bits définissent le nombre d'octets à envoyer.
+\paragraph{Bits 4:3 -- NbBytes[1:0]} Ces bits définissent le nombre d'octets à envoyer.
 
 \begin{table}[H]
 \centering
@@ -166,7 +165,7 @@ Ce registre regroupe la configuration du contrôleur. Il correspond à la relati
 \end{tabularx}
 \end{table}
 
-\paragraph{Bit 1 -- IntMode} Ce bit permet d'activer ou de désactiver l'interruption.
+\paragraph{Bits 2:1 -- IntMode[1:0]} Ce champ définit la nature du signal d'interruption produit (\textit{IT\_I2C}).
 
 \begin{table}[H]
 \centering
@@ -174,8 +173,10 @@ Ce registre regroupe la configuration du contrôleur. Il correspond à la relati
 \begin{tabularx}{0.8\textwidth}{|C{2cm}|X|}
 \hline
 \textbf{Valeur} & \textbf{Description} \\ \hline
-0 & Interruption désactivée \\ \hline
-1 & Interruption activée sur la lecture \\ \hline
+\texttt{0x0} & Pas d'interruption produite \\ \hline
+\texttt{0x1} & Interruption produite à l'émission d'un octet \\ \hline
+\texttt{0x2} & Interruption produite à la réception d'un octet \\ \hline
+\texttt{0x3} & Interruption produite à l'émission et à la réception d'un octet \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -244,6 +245,7 @@ Ce registre contient la donnée lue depuis l'esclave. Il correspond à la relati
 
 \begin{table}[H]
 \centering
+\caption{Registre DATA\_R}
 \small
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{|l|*{8}{C{1.6cm}|}}
@@ -267,6 +269,7 @@ Ce registre contient la donnée à écrire dans l'esclave. Il correspond à la r
 
 \begin{table}[H]
 \centering
+\caption{Registre DATA\_W}
 \small
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{|l|*{8}{C{1.6cm}|}}
