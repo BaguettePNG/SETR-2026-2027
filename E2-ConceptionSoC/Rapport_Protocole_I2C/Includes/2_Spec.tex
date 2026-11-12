@@ -70,9 +70,215 @@ Le tableau ci-après décrit les caractéristiques des relations identifiées :
 
 Voici le diagramme d'activités pour le protocole I2C, qui décrit le comportement du circuit à concevoir. Il est à noter que les activités sont décrites de manière abstraite, sans entrer dans les détails de l'implémentation. Le diagramme est basé sur les spécifications du protocole I2C et les exigences du système sur puce. Il montre comment le circuit interagit avec le processeur et l'esclave I2C, en gérant les transactions de lecture et d'écriture, ainsi que les interruptions générées à la fin des transactions.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\linewidth]{Images/2_SPEC/Diagramme activités.pdf}
     \caption{Diagramme d'activités du protocole I2C}
 \end{figure}
 
+\subsection{Spécification des registres}
+
+%% ------------------------------------------------------------
+%% Fragment à coller sous \subsection{Spécification des registres}
+%% Packages nécessaires : array, tabularx, float (déjà utilisés)
+%% ------------------------------------------------------------
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+Le contrôleur I2C est piloté par le processeur à travers quatre registres de 16~bits, accessibles à des adresses paires (offsets \texttt{0x00} à \texttt{0x06}). Le tableau~\ref{tab:memmap_i2c} en donne la cartographie et les figures suivantes détaillent le contenu de chaque registre.
+
+\begin{table}[H]
+\centering
+\caption{Cartographie des registres du contrôleur I2C}
+\label{tab:memmap_i2c}
+\small
+\begin{tabularx}{\textwidth}{|C{1.6cm}|C{2.2cm}|C{1.8cm}|C{1.8cm}|X|}
+\hline
+\textbf{Offset} & \textbf{Nom} & \textbf{Accès} & \textbf{Reset} & \textbf{Rôle} \\ \hline
+\texttt{0x00} & Config & R/W & \texttt{0x0000} & Configuration du contrôleur (adresse esclave, vitesse, nombre d'octets, interruption, activation) \\ \hline
+\texttt{0x02} & Status & R/W & \texttt{0x0000} & État des transactions d'émission et de réception \\ \hline
+\texttt{0x04} & DATA\_R & R/W & \texttt{0x0000} & Donnée lue depuis l'esclave \\ \hline
+\texttt{0x06} & DATA\_W & R/W & \texttt{0x0000} & Donnée à écrire dans l'esclave \\ \hline
+\end{tabularx}
+\end{table}
+
+\noindent Dans la suite, les cases marquées «~--~» correspondent à des bits réservés.
+
+%% ============================================================
+\subsubsection{Registre Config (offset \texttt{0x00})}
+
+Ce registre regroupe la configuration du contrôleur. Il correspond à la relation d'entrée \textit{Config} du tableau~\ref{tab:relations_es_i2c}.
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|*{8}{C{1.6cm}|}}
+\hline
+\textbf{Bit} & \textbf{15} & \textbf{14} & \textbf{13} & \textbf{12} & \textbf{11} & \textbf{10} & \textbf{9} & \textbf{8} \\ \hline
+\textbf{Nom} & \multicolumn{7}{c|}{ADDR[6:0]} & -- \\ \hline
+\textbf{Accès} & R/W & R/W & R/W & R/W & R/W & R/W & R/W & -- \\ \hline
+\textbf{Reset} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -- \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|*{8}{C{1.6cm}|}}
+\hline
+\textbf{Bit} & \textbf{7} & \textbf{6} & \textbf{5} & \textbf{4} & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} \\ \hline
+\textbf{Nom} & -- & -- & \multicolumn{2}{c|}{Speed[1:0]} & \multicolumn{2}{c|}{NbBytes[1:0]} & IntMode & Enable \\ \hline
+\textbf{Accès} & -- & -- & R/W & R/W & R/W & R/W & R/W & R/W \\ \hline
+\textbf{Reset} & -- & -- & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{table}
+
+\paragraph{Bits 15:9 -- ADDR[6:0]} Ces bits contiennent l'adresse 7~bits de l'esclave I2C ciblé.
+
+\paragraph{Bits 5:4 -- Speed[1:0]} Ces bits définissent la vitesse du bus. Ils ne sont pas synchronisés.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{0.8\textwidth}{|C{2cm}|X|}
+\hline
+\textbf{Valeur} & \textbf{Description} \\ \hline
+\texttt{0x0} & Standard Mode : 100~kHz \\ \hline
+\texttt{0x1} & Fast Mode : 400~kHz \\ \hline
+\texttt{0x2} & Fast Mode Plus : 1~MHz \\ \hline
+\texttt{0x3} & High Speed Mode : 3,4~MHz \\ \hline
+\end{tabularx}
+\end{table}
+
+\paragraph{Bits 3:2 -- NbBytes[1:0]} Ces bits définissent le nombre d'octets à envoyer.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{0.8\textwidth}{|C{2cm}|X|}
+\hline
+\textbf{Valeur} & \textbf{Description} \\ \hline
+\texttt{0x0} & 8 bits -- 1 octet \\ \hline
+\texttt{0x1} & 16 bits -- 2 octets \\ \hline
+\texttt{0x2} & 24 bits -- 3 octets \\ \hline
+\texttt{0x3} & 32 bits -- 4 octets \\ \hline
+\end{tabularx}
+\end{table}
+
+\paragraph{Bit 1 -- IntMode} Ce bit permet d'activer ou de désactiver l'interruption.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{0.8\textwidth}{|C{2cm}|X|}
+\hline
+\textbf{Valeur} & \textbf{Description} \\ \hline
+0 & Interruption désactivée \\ \hline
+1 & Interruption activée sur la lecture \\ \hline
+\end{tabularx}
+\end{table}
+
+\paragraph{Bit 0 -- Enable} Ce bit permet d'activer ou de désactiver le périphérique I2C.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{0.8\textwidth}{|C{2cm}|X|}
+\hline
+\textbf{Valeur} & \textbf{Description} \\ \hline
+0 & Périphérique désactivé \\ \hline
+1 & Périphérique activé \\ \hline
+\end{tabularx}
+\end{table}
+
+%% ============================================================
+\subsubsection{Registre Status (offset \texttt{0x02})}
+
+Ce registre reflète l'état des transactions. Il correspond à la relation de sortie \textit{Status} du tableau~\ref{tab:relations_es_i2c}.
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|*{8}{C{1.6cm}|}}
+\hline
+\textbf{Bit} & \textbf{15} & \textbf{14} & \textbf{13} & \textbf{12} & \textbf{11} & \textbf{10} & \textbf{9} & \textbf{8} \\ \hline
+\textbf{Nom} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\textbf{Accès} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\textbf{Reset} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|*{8}{C{1.6cm}|}}
+\hline
+\textbf{Bit} & \textbf{7} & \textbf{6} & \textbf{5} & \textbf{4} & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} \\ \hline
+\textbf{Nom} & -- & -- & -- & -- & \scriptsize EmissionOK & \scriptsize ReceptionOK & \scriptsize EmissionError & \scriptsize ReceptionError \\ \hline
+\textbf{Accès} & -- & -- & -- & -- & R/W & R/W & R/W & R/W \\ \hline
+\textbf{Reset} & -- & -- & -- & -- & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Description des bits du registre Status}
+\small
+\begin{tabularx}{\textwidth}{|C{1.4cm}|C{3cm}|X|X|}
+\hline
+\textbf{Bit} & \textbf{Nom} & \textbf{Description} & \textbf{Valeurs} \\ \hline
+3 & EmissionOK & Indique que l'écriture dans l'esclave I2C a été réalisée. & 0 : écriture non réalisée \newline 1 : écriture réalisée \\ \hline
+2 & ReceptionOK & Indique que la lecture dans l'esclave I2C a été réalisée. & 0 : lecture non réalisée \newline 1 : lecture réalisée \\ \hline
+1 & EmissionError & Indique que l'écriture dans l'esclave I2C n'a pas pu être réalisée. & 0 : absence d'erreur \newline 1 : présence d'erreur \\ \hline
+0 & ReceptionError & Indique que la lecture dans l'esclave I2C n'a pas pu être réalisée. & 0 : absence d'erreur \newline 1 : présence d'erreur \\ \hline
+\end{tabularx}
+\end{table}
+
+%% ============================================================
+\subsubsection{Registre DATA\_R (offset \texttt{0x04})}
+
+Ce registre contient la donnée lue depuis l'esclave. Il correspond à la relation de sortie \textit{DataReceived}.
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|*{8}{C{1.6cm}|}}
+\hline
+\textbf{Bit} & \textbf{15} & \textbf{14} & \textbf{13} & \textbf{12} & \textbf{11} & \textbf{10} & \textbf{9} & \textbf{8} \\ \hline
+\textbf{Nom} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\textbf{Accès} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\textbf{Reset} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\hline
+\textbf{Bit} & \textbf{7} & \textbf{6} & \textbf{5} & \textbf{4} & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} \\ \hline
+\textbf{Nom} & \multicolumn{8}{c|}{DATA[7:0]} \\ \hline
+\textbf{Accès} & R/W & R/W & R/W & R/W & R/W & R/W & R/W & R/W \\ \hline
+\textbf{Reset} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{table}
+
+%% ============================================================
+\subsubsection{Registre DATA\_W (offset \texttt{0x06})}
+
+Ce registre contient la donnée à écrire dans l'esclave. Il correspond à la relation d'entrée \textit{DataToSend}.
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|*{8}{C{1.6cm}|}}
+\hline
+\textbf{Bit} & \textbf{15} & \textbf{14} & \textbf{13} & \textbf{12} & \textbf{11} & \textbf{10} & \textbf{9} & \textbf{8} \\ \hline
+\textbf{Nom} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\textbf{Accès} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\textbf{Reset} & -- & -- & -- & -- & -- & -- & -- & -- \\ \hline
+\hline
+\textbf{Bit} & \textbf{7} & \textbf{6} & \textbf{5} & \textbf{4} & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} \\ \hline
+\textbf{Nom} & \multicolumn{8}{c|}{DATA[7:0]} \\ \hline
+\textbf{Accès} & R/W & R/W & R/W & R/W & R/W & R/W & R/W & R/W \\ \hline
+\textbf{Reset} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{table}
