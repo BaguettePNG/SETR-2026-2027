@@ -53,9 +53,8 @@ Le tableau ci-après décrit les caractéristiques des relations identifiées :
         DataReq & Entrée & Événementielle & DefRequest & (Read, Write) \\ \hline
         DataToSend & Entrée & Permanente & DefData & Array[0..7] of DefBit \\ \hline
         DataReceived & Sortie & Permanente & DefData & Array[0..7] of DefBit \\ \hline
-        Addr & Entrée & Permanente & DefAddr & Array[0..6] of DefBit \\ \hline
-        Config & Entrée & Permanente & DefConfig & IntMode: DefIntMode + Speed: DefSpeed + NbBytes: DefNbBytes + Enable: DefBit \\ \hline
-        Status & Sortie & Permanente & DefStatus & ReceptionError: DefBit + EmissionOK: DefBit + ReceptionOK: DefBit \\ \hline
+        Config & Entrée & Permanente & DefConfig & Addr : DefAddr + IntMode: DefIntMode + Speed: DefSpeed + NbBytes: DefNbBytes + Enable: DefBit \\ \hline
+        Status & Sortie & Permanente & DefStatus & ReceptionError: DefBit + EmissionOK: DefBit + EmissionError: DefBit + ReceptionOK: DefBit\\ \hline
         IT\_I2C & Sortie & Événementielle & - & - \\ \hline
         SDA & Bidirectionnel & Permanente & DefBit & (Active, Inactive) \\ \hline
         SCL & Sortie & Permanente & DefBit & (Active, Inactive) \\ \hline
