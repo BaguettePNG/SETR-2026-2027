@@ -2,6 +2,130 @@
 
 \input{Param/UsePackage.tex}
 
+% ============================================================
+%  Listings : styles C et VHDL
+% ============================================================
+\usepackage{listings}
+\usepackage{xcolor}
+
+% --- Palette ---
+\definecolor{codeBg}{rgb}{0.97,0.97,0.97}
+\definecolor{codeFrame}{rgb}{0.75,0.75,0.75}
+\definecolor{codeComment}{rgb}{0.00,0.50,0.00}
+\definecolor{codeKeyword}{rgb}{0.00,0.00,0.70}
+\definecolor{codeType}{rgb}{0.55,0.00,0.55}
+\definecolor{codeString}{rgb}{0.75,0.10,0.10}
+\definecolor{codeNumber}{rgb}{0.85,0.45,0.00}
+\definecolor{codeLineNum}{rgb}{0.50,0.50,0.50}
+
+% --- Style commun ---
+\lstdefinestyle{base}{
+    backgroundcolor=\color{codeBg},
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{codeComment}\itshape,
+    keywordstyle=\color{codeKeyword}\bfseries,
+    stringstyle=\color{codeString},
+    numberstyle=\tiny\color{codeLineNum},
+    numbers=left,
+    numbersep=8pt,
+    stepnumber=1,
+    frame=single,
+    rulecolor=\color{codeFrame},
+    breaklines=true,
+    breakatwhitespace=false,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    showstringspaces=false,
+    tabsize=4,
+    captionpos=b,
+    xleftmargin=1.5em,
+    framexleftmargin=1.5em,
+    aboveskip=1em,
+    belowskip=1em,
+    columns=fullflexible,
+    keepspaces=true,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate=
+        {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {à}{{\`a}}1 {â}{{\^a}}1
+        {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1 {ù}{{\`u}}1 {ç}{{\c c}}1
+        {É}{{\'E}}1 {È}{{\`E}}1 {À}{{\`A}}1
+}
+
+% --- Langage C : ajout de types et mots-clés usuels (embarqué) ---
+\lstdefinestyle{Cstyle}{
+    style=base,
+    language=C,
+    morekeywords={uint8_t,uint16_t,uint32_t,uint64_t,
+                  int8_t,int16_t,int32_t,int64_t,
+                  bool,true,false,NULL,size_t,
+                  volatile,inline,restrict},
+    keywords={[2]uint8_t,uint16_t,uint32_t,uint64_t,
+              int8_t,int16_t,int32_t,int64_t,size_t,bool},
+    keywordstyle={[2]\color{codeType}\bfseries},
+    emph={define,include,ifdef,ifndef,endif,pragma},
+    emphstyle=\color{codeNumber}\bfseries,
+    morecomment=[l][\color{codeNumber}]{\#},
+    numberstyle=\tiny\color{codeLineNum},
+}
+
+% --- Langage VHDL ---
+\lstdefinelanguage{VHDLext}{
+    language=VHDL,
+    morekeywords=[1]{
+        library,use,entity,architecture,of,is,begin,end,
+        port,generic,map,in,out,inout,buffer,
+        signal,variable,constant,type,subtype,
+        process,if,then,elsif,else,case,when,others,
+        for,loop,while,generate,component,
+        function,procedure,return,package,body,
+        wait,until,after,rising_edge,falling_edge,
+        to,downto,range,all,open,null,
+        and,or,not,nand,nor,xor,xnor,
+        with,select,block,assert,report,severity
+    },
+    morekeywords=[2]{
+        std_logic,std_logic_vector,std_ulogic,std_ulogic_vector,
+        unsigned,signed,integer,natural,positive,boolean,bit,
+        bit_vector,string,character,time,
+        ieee,std_logic_1164,numeric_std,std_logic_unsigned,
+        std_logic_arith,work
+    },
+    sensitive=false,
+    morecomment=[l]{--},
+    morestring=[b]",
+    morestring=[b]'
+}
+
+\lstdefinestyle{VHDLstyle}{
+    style=base,
+    language=VHDLext,
+    keywordstyle={[1]\color{codeKeyword}\bfseries},
+    keywordstyle={[2]\color{codeType}\bfseries},
+    alsoletter={_},
+    morecomment=[l]{--},
+}
+
+% --- Style par défaut ---
+\lstset{style=base}
+
+% --- Raccourcis ---
+% Environnements :  \begin{lstlisting}[style=Cstyle] ... \end{lstlisting}
+% Raccourci :       \begin{Ccode} ... \end{Ccode}
+%                   \begin{VHDLcode} ... \end{VHDLcode}
+\lstnewenvironment{Ccode}[1][]{\lstset{style=Cstyle,#1}}{}
+\lstnewenvironment{VHDLcode}[1][]{\lstset{style=VHDLstyle,#1}}{}
+
+% Code en ligne :  \C{uint8_t x;}   \vhdl{std_logic}
+\newcommand{\C}[1]{\lstinline[style=Cstyle,numbers=none,frame=none,backgroundcolor=\color{white}]{#1}}
+\newcommand{\vhdl}[1]{\lstinline[style=VHDLstyle,numbers=none,frame=none,backgroundcolor=\color{white}]{#1}}
+
+% Inclusion de fichiers :
+%   \lstinputlisting[style=Cstyle,caption={main.c}]{Sources/main.c}
+%   \lstinputlisting[style=VHDLstyle,caption={i2c\_master.vhd}]{Sources/i2c_master.vhd}
+
+% Nom du titre des listings en français
+\renewcommand{\lstlistingname}{Code}
+\renewcommand{\lstlistlistingname}{Table des codes}
 
 \hypersetup{
     colorlinks=true,
@@ -16,34 +140,33 @@
 \begin{document}
 
 \begin{titlepage}
-    \centering
+\centering
 
-    % --- Logo en haut ---
-    \includegraphics[width=0.9\linewidth]{Param/Polytech_Univ.png}\\[1.5cm]
+% --- Logo en haut ---
+\includegraphics[width=0.9\linewidth]{Param/Polytech_Univ.png}\\[1.5cm]
 
-    % --- Titre principal ---
+% --- Titre principal ---
     {\Huge \textbf{Rapport de conception SoC Contrôleur I2C}}\\[0.5cm]
-    \rule{0.7\textwidth}{0.5pt}\\[0.8cm]
+\rule{0.7\textwidth}{0.5pt}\\[0.8cm]
     {\Large \textbf{ETN5 - SETR}}\\[1cm]
-    
-    % --- Mise en page en deux colonnes (élève / encadrants) ---
-    \noindent
-    \begin{minipage}[t]{0.48\textwidth}
-        \raggedright
+% --- Mise en page en deux colonnes (élève / encadrants) ---
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\raggedright
         {\large \textbf{Élèves :}}\\[0.3cm]
         {\large
         Nolan \textsc{BUCHET}}\\[0.6cm]
         {\large
         Maxence \textsc{BOULEAU}}\\[0.6cm]
-    \end{minipage}%
-    \hfill
-    \begin{minipage}[t]{0.48\textwidth}
-        \raggedleft
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\raggedleft
         {\large \textbf{Date :}}\\[0.3cm]
         {\large
         Octobre 2026}
-    \end{minipage}
-    \vfill
+\end{minipage}
+\vfill
 \end{titlepage}
 
 \input{Param/param.tex}
