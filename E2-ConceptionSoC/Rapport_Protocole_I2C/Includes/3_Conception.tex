@@ -244,7 +244,12 @@ L'utilisation du signal CLK de référence conduit à changer la nature des rela
 La fonction Interface se décompose selon deux fonctions : Lecture et Ecriture. La fonction Lecture est utilisée pour lire les signaux logiques de l'interface Système à uP et de l'interface Esclave distant. La fonction Ecriture est utilisée pour écrire les signaux logiques de l'interface Système à uP et de l'interface Esclave distant.
 \\
 
-%%%% Include figure
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Images/3_CONCEPTION/Décomposition fonction interface.pdf}
+    \caption{Fonctions Lecture et Ecriture du contrôleur I2C}
+    \label{fig:fonctions_lecture_ecriture}
+\end{figure}
 
 Voici les algorithmes de la fonction Lecture et de la fonction Ecriture.
 
