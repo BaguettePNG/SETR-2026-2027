@@ -76,6 +76,43 @@ Voici le diagramme d'activités pour le protocole I2C, qui décrit le comporteme
     \caption{Diagramme d'activités du protocole I2C}
 \end{figure}
 
+\subsection{Spécifications fonctionnelles}
+
+Comportement vis-à-vis de l'entité Système à uP. À chaque requête DataReq, le circuit
+répond :
+
+\begin{itemize}
+    \item Write : recopie de la donnée dans le registre visé ; une écriture dans le registre de
+    données à émettre empile l'octet dans la FIFO d'émission (DataTx[j] := DataToSend ; j :=
+    j+1) ; une écriture avec Start=1 dans le registre de configuration lance une transaction ;
+    \item Read : présentation du registre visé ; une lecture dans le registre de données reçues
+    dépile l'octet de la FIFO de réception (DataReceived := DataRx[i] ; i := i+1) ; une lecture
+    du statut désactive l'interruption.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\linewidth]{Images/2_SPEC/utilisateur_AUTOMATE.drawio.pdf}
+    \caption{Comportement vis-à-vis des sorties SCL et SDA}
+\end{figure}
+
+Diagramme d'activités. Les comportements précédents sont répartis en trois activités :
+EmissionReceptionI2C et GestionHorlogeI2C, qui sont exécutées en parallèle, et GestionInterruptionI2C, qui est exécutée après la fin de la transaction. L'activité EmissionReceptionI2C gère l'émission et la réception des octets sur le bus I2C, tandis que l'activité GestionHorlogeI2C génère les signaux d'horloge SCL et SDA. 
+\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Images/2_SPEC/GestionI2C_AUTOMATE.pdf}
+    \caption{Comportement vis-à-vis des sorties SCL et SDA}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Images/2_SPEC/GestionHorloge_AUTOMATE.drawio.pdf}
+    \caption{Comportement vis-à-vis des sorties SCL}
+\end{figure}
+
+
 \subsection{Spécification des registres}
 %% ------------------------------------------------------------
 %% Fragment à coller sous \subsection{Spécification des registres}
