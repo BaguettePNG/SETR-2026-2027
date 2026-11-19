@@ -1,9 +1,5 @@
 \section{Application à développer}
 
-\begin{comment}
-    Vérifier cette partie, relire le texte.
-\end{comment}
-
 \subsection{Contexte}
 
 Cette partie aborde le développement de l'application finale du projet, qui consiste à implanter un système de mesure du temps de réaction. L'objectif est d'évaluer la vitesse de réaction d'un utilisateur à un stimulus visuel géré par la carte SAMD21 et sa carte d'extension OLED1. Le système doit assurer un comportement fonctionnel et temporel rigoureux en s'appuyant sur les mécanismes de l'exécutif FreeRTOS, tels que les tâches, les sémaphores et les files de messages. \\
@@ -29,7 +25,7 @@ Pour concevoir cette application sous FreeRTOS, l'analyse fonctionnelle met en �
         \item \textit{taskDisplay} : Tâche d'affichage passive restituant les statistiques sur l'écran OLED.
     \end{enumerate}
     \item \textbf{Sémaphores binaires :} \textit{SemSupervision} et \textit{SemObservation} synchronisent le réveil des tâches sur le tic d'horloge.
-    \item \textbf{Mutex (Exclusion Mutuelle) :} \textit{mutex\_mode} et \textit{mutex\_oled1} protègent respectivement le mode et les accès concurrents au bus de la carte OLED1.
+    \item \textbf{Mutex (Exclusion Mutuelle) :} \textit{mutex\_oled1} protègent respectivement le mode et les accès concurrents au bus de la carte OLED1.
     \item \textbf{File de messages (Queue) :} \textit{xQueueMeasurementResults} transfère le tableau des résultats statistiques vers l'affichage.
 \end{itemize}
 
@@ -50,7 +46,7 @@ Nos bibliothèques sont celle de l'ASF, FreeRTOS et bibliothèques C standard. N
 Les constantes sont notement celle des priorités des tâches, de la période d'horloge et du nombre de mesures à effectuer. \\
 \\
 
-La déinition de nos Semaphores ( Supervision et Observation ), Mutex ( Mode et OLED1 ) et Queue sont également présentes dans la section des variables. \\
+La déinition de nos Semaphores ( Supervision et Observation ), Mutex ( OLED1 ) et Queue sont également présentes dans la section des variables. \\
 \\
 
 La définition des états de la machine à états ( REPOS, ATTENTE, MESURE, ATTENTE\_MESURE, FIN\_MESURE ) et du mode de fonctionnement ( Normal, Obseration ) sont également présentes dans la section des variables. 
@@ -132,7 +128,6 @@ static OLED1_CREATE_INSTANCE(oled1, OLED1_EXT_HEADER);
 
 static SemaphoreHandle_t SemSupervision = NULL;
 static SemaphoreHandle_t SemObservation = NULL;
-static SemaphoreHandle_t mutex_mode     = NULL;
 static SemaphoreHandle_t mutex_oled1    = NULL;
 static QueueHandle_t xQueueMeasurementResults = NULL; 
 
@@ -216,7 +211,6 @@ int main(void)
 
     SemSupervision = xSemaphoreCreateBinary();
     SemObservation = xSemaphoreCreateBinary();
-    mutex_mode     = xSemaphoreCreateMutex();
     mutex_oled1    = xSemaphoreCreateMutex();
     xQueueMeasurementResults = xQueueCreate(1, sizeof(measurementResults));
 
@@ -255,11 +249,7 @@ void taskSupervision(void *pvParameters)
 
         if ((StartPrec == false) && (Start == true))
         {
-            if (xSemaphoreTake(mutex_mode, portMAX_DELAY) == pdTRUE)
-            {
-                if (mode == Normal) mode = Observation;
-                xSemaphoreGive(mutex_mode);
-            }
+            if (mode == Normal) mode = Observation;
         }
         StartPrec = Start;
     }
@@ -281,10 +271,8 @@ void taskObservation(void *pvParameters)
         PresState = NextState;
 
         Mode current_mode = Normal;
-        if (xSemaphoreTake(mutex_mode, portMAX_DELAY) == pdTRUE) {
-            current_mode = mode;
-            xSemaphoreGive(mutex_mode);
-        }
+        current_mode = mode;
+           
 
         switch (PresState)
         {
@@ -378,10 +366,7 @@ void taskObservation(void *pvParameters)
                 set_etat_led0(false);
                 if (get_entree_buttons() == 0)
                 {
-                    if (xSemaphoreTake(mutex_mode, portMAX_DELAY) == pdTRUE) {
-                        mode = Normal;
-                        xSemaphoreGive(mutex_mode);
-                    }
+                    mode = Normal;
                     NextState = REPOS;
                 }
                 break;
