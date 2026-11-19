@@ -35,7 +35,51 @@ Pour concevoir cette application sous FreeRTOS, l'analyse fonctionnelle met en �
 
 \subsection{Analyse et explication du code de l'application}
 
-Le programme s'articule autour de l'initialisation matérielle (\textit{system\_init}, \textit{oled1\_init}, \textit{ConfigureMeasure}), de la création des objets FreeRTOS, puis du lancement de l'ordonnanceur (\textit{vTaskStartScheduler}). Le cœur du système repose sur la machine à états de la tâche d'observation (\textit{REPOS}, \textit{ATTENTE}, \textit{MESURE}, \textit{ATTENTE\_MESURE}, \textit{FIN\_MESURE}) qui gère l'enchaînement des 5 mesures chronométrées. \\
+Le programme est structuré sous cette forme : 
+
+\begin{enumerate}
+    \item \textbf{Bibliothèques}
+    \item \textbf{Constantes}
+    \item \textbf{Variables} :
+    \item \textbf{Procédures}
+\end{enumerate}
+
+Nos bibliothèques sont celle de l'ASF, FreeRTOS et bibliothèques C standard. Nous avons également inclus les bibliothèques spécifiques à la carte OLED1 et à la mesure du temps. \\
+\\
+
+Les constantes sont notement celle des priorités des tâches, de la période d'horloge et du nombre de mesures à effectuer. \\
+\\
+
+La déinition de nos Semaphores ( Supervision et Observation ), Mutex ( Mode et OLED1 ) et Queue sont également présentes dans la section des variables. \\
+\\
+
+La définition des états de la machine à états ( REPOS, ATTENTE, MESURE, ATTENTE\_MESURE, FIN\_MESURE ) et du mode de fonctionnement ( Normal, Obseration ) sont également présentes dans la section des variables. 
+\\
+
+Les variables de l'automate sont également présentes dans la section des variables. \\
+\\
+
+Les procédures sont les suivantes :
+
+\textbf{get\_entree\_button} permet de lire l'état des boutons de la carte OLED1 et de retourner un octet représentant l'état des trois boutons. \\
+
+\textbf{set\_sortie\_led0} permet de contrôler l'état des LED de la carte OLED1 en fonction d'un octet représentant l'état des trois LED. \\
+
+\textbf{set\_etat\_led0} permet de contrôler l'état de la LED0 de la carte SAMD21 en fonction d'un booléen représentant l'état de la LED. \\
+
+\textbf{vSetpHarware} permet d'initialiser le système, l'écran OLED1 et la mesure du temps. \\
+
+\textbf{taskClock} est la tâche périodique qui sert d'horloge globale de référence. Elle se réveille toutes les millisecondes et libère les sémaphores de supervision et d'observation. \\
+
+\textbf{taskSupervision} est la tâche qui surveille l'état du bouton de démarrage. Lorsqu'un appui est détecté, elle bascule le mode de fonctionnement en mode observation. \\
+
+\textbf{taskObservation}, c'est la ou l'on va retrouvé l'implémentation de l'automate de l'application.
+
+\textbf{taskDisplay} permet d'afficher sur l'écran notre résultat.
+
+\textbf{main} permet d'appler l'initialisation du système, de créer les objets FreeRTOS et de lancer l'ordonnanceur. \\
+
+Le fonctionnement de l'application est illustré par le chronogramme présenté dans la figure ci-dessous, qui met en évidence les interactions entre les tâches et la mesure de la période d'observation. \\
 
 \begin{figure}[htbp]
     \centering
